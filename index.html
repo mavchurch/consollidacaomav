@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <title>Consolidação e cuidado</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 48 48%22%3E%3Crect width=%2248%22 height=%2248%22 rx=%2212%22 fill=%22%231D3557%22/%3E%3Ctext x=%2224%22 y=%2232%22 font-size=%2222%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22 font-weight=%22bold%22%3EC%3C/text%3E%3C/svg%3E">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#1D3557">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+/* =========================================================
+   IDENTIDADE VISUAL — acolhedora, em tons de azul
+   ========================================================= */
+:root {
+  --marinho: #1D3557;
+  --marinho-2: #27476E;
+  --azul: #3A72B8;
+  --azul-forte: #2F61A0;
+  --azul-suave: #E3EDF8;
+  --azul-claro: #F1F6FC;
+  --gelo: #F6F8FB;
+  --branco: #FFFFFF;
+  --borda: #E1E7EF;
+  --texto: #1C2B3A;
+  --texto-2: #5A6A7C;
+  --texto-3: #8796A8;
+  --calor: #E3A24A;
+  --calor-suave: #FCF2E2;
+  --calor-texto: #94621A;
+  --verde: #2E8467;
+  --verde-suave: #E3F3EC;
+  --perigo: #BC4B47;
+  --perigo-suave: #FBEAE9;
+  --raio: 14px;
+  --raio-sm: 10px;
+  --sombra: 0 1px 2px rgba(18, 42, 72, .05), 0 6px 20px rgba(18, 42, 72, .05);
+  --sombra-forte: 0 18px 48px rgba(18, 42, 72, .18);
+  --fonte: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--fonte); font-size: 15px; line-height: 1.5;
+  color: var(--texto); background: var(--gelo);
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--azul); }
+h1, h2, h3, h4 { margin: 0; font-weight: 650; letter-spacing: -0.01em; color: var(--marinho); }
+h1 { font-size: 26px; } h2 { font-size: 19px; } h3 { font-size: 16px; }
+p { margin: 0; }
+.muted { color: var(--texto-2); }
+.small { font-size: 13px; }
+.oculto { display: none !important; }
+svg.ic { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+/* ---------- Carregamento ---------- */
+.carregando-tela { min-height: 100vh; display: grid; place-items: center; }
+.carregando { padding: 48px; display: grid; place-items: center; }
+.spinner { width: 28px; height: 28px; border-radius: 50%; border: 3px solid var(--azul-suave); border-top-color: var(--azul); animation: girar .8s linear infinite; display: inline-block; }
+@keyframes girar { to { transform: rotate(360deg); } }
+.esqueleto { background: linear-gradient(90deg, #EDF1F6 25%, #F6F8FB 50%, #EDF1F6 75%); background-size: 200% 100%; animation: brilho 1.3s infinite; border-radius: 10px; }
+@keyframes brilho { to { background-position: -200% 0; } }
+
+/* ---------- Login ---------- */
+.login { min-height: 100vh; display: grid; grid-template-columns: 1.05fr 1fr; }
+.login-arte {
+  position: relative; overflow: hidden; color: #fff; padding: 56px;
+  background: radial-gradient(120% 90% at 0% 0%, #2F5D93 0%, var(--marinho) 55%, #142843 100%);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.login-arte .rede-fundo { position: absolute; width: 620px; height: 620px; right: -250px; top: 4%; opacity: .7; pointer-events: none; }
+.marca-texto { display: flex; align-items: center; gap: 12px; }
+.marca-texto b { display: block; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+.marca-texto span { display: block; font-size: 11px; font-weight: 500; letter-spacing: .04em; color: rgba(255,255,255,.62); margin-top: 1px; }
+.login-arte .marca-grande { position: relative; z-index: 1; }
+.login-arte .marca-grande b { font-size: 30px; }
+.login-arte .marca-grande span { font-size: 12px; }
+.login-arte h2.boas-vindas { color: #fff; font-size: 34px; line-height: 1.15; font-weight: 650; max-width: 460px; letter-spacing: -.025em; margin-bottom: 14px; }
+.login-arte .versiculo { color: rgba(255,255,255,.8); font-size: 15px; max-width: 440px; }
+.login-arte .frase-bloco { position: relative; z-index: 1; max-width: 470px; }
+.login-arte .traco { display: block; width: 44px; height: 3px; border-radius: 3px; background: #F3C98B; margin-bottom: 22px; }
+.login-arte .frase { color: #fff; font-size: 46px; line-height: 1.1; font-weight: 650; letter-spacing: -.03em; margin-bottom: 22px; }
+.login-arte .frase em { font-style: italic; font-weight: 500; color: #F3C98B; font-family: Georgia, 'Times New Roman', serif; letter-spacing: -.01em; }
+.login-arte .versiculo { color: rgba(255,255,255,.78); font-size: 16px; line-height: 1.6; font-style: italic; }
+.login-arte .referencia { margin-top: 8px; color: #F3C98B; font-weight: 600; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+.login-arte .rodape { font-size: 13px; color: rgba(255,255,255,.55); position: relative; z-index: 1; }
+.login-form { display: grid; place-items: center; padding: 32px; }
+.login-card { width: 100%; max-width: 380px; }
+.login-card h1 { margin-bottom: 6px; }
+.login-card .muted { margin-bottom: 28px; }
+.login-card .btn { width: 100%; justify-content: center; padding: 13px; margin-top: 8px; }
+.aviso-restrito { margin-top: 22px; display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--texto-2); }
+
+/* ---------- Estrutura ---------- */
+.app { display: grid; grid-template-columns: 252px 1fr; min-height: 100vh; }
+.sidebar {
+  background: var(--marinho); color: #fff; padding: 22px 14px; position: sticky; top: 0; height: 100vh;
+  display: flex; flex-direction: column; gap: 22px;
+}
+.marca { padding: 4px 8px 10px; }
+.marca b { font-size: 20px; }
+.nav { display: flex; flex-direction: column; gap: 3px; }
+.nav-titulo { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.45); padding: 12px 12px 6px; }
+.nav-item {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; border: 0;
+  background: none; color: rgba(255,255,255,.78); cursor: pointer; text-align: left; position: relative; font-weight: 500;
+}
+.nav-item:hover { background: rgba(255,255,255,.07); color: #fff; }
+.nav-item.ativo { background: rgba(255,255,255,.12); color: #fff; }
+.nav-item.ativo::before { content: ''; position: absolute; left: -14px; top: 9px; bottom: 9px; width: 4px; border-radius: 0 4px 4px 0; background: var(--calor); }
+.nav-item .contador { margin-left: auto; background: var(--calor); color: #3B2607; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px; }
+.sidebar-rodape { margin-top: auto; border-top: 1px solid rgba(255,255,255,.1); padding-top: 14px; }
+.cartao-usuario { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; cursor: pointer; border: 0; background: none; color: #fff; width: 100%; text-align: left; }
+.cartao-usuario:hover { background: rgba(255,255,255,.07); }
+.cartao-usuario small { display: block; color: rgba(255,255,255,.6); font-size: 12px; }
+
+.principal { min-width: 0; display: flex; flex-direction: column; }
+.topo {
+  position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 14px;
+  padding: 14px 32px; background: rgba(246,248,251,.86); backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+}
+.topo.rolado { border-bottom-color: var(--borda); }
+.topo-marca { display: none; align-items: center; gap: 9px; font-weight: 700; color: var(--marinho); }
+.topo-marca .marca-texto { gap: 8px; }
+.topo-marca .marca-texto b { font-size: 17px; }
+.topo-marca .marca-texto span { color: var(--texto-3); font-size: 10px; margin-top: 0; }
+.topo-titulo { font-weight: 600; color: var(--texto-2); font-size: 14px; }
+.topo-acoes { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+.conteudo { padding: 8px 32px 48px; max-width: 1200px; width: 100%; }
+.nav-movel { display: none; }
+
+/* ---------- Cabeçalhos de página ---------- */
+.cabecalho { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin: 10px 0 22px; flex-wrap: wrap; }
+.cabecalho p { margin-top: 4px; }
+.saudacao h1 { font-size: 28px; }
+.voltar { display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; color: var(--texto-2); cursor: pointer; padding: 4px 0; margin-bottom: 8px; font-weight: 500; }
+.voltar:hover { color: var(--azul); }
+
+/* ---------- Cartões ---------- */
+.card { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio); box-shadow: var(--sombra); }
+.card-corpo { padding: 20px 22px; }
+.card-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px 0; }
+.card-topo h3 { display: flex; align-items: center; gap: 8px; }
+.grade { display: grid; gap: 18px; }
+.grade-2 { grid-template-columns: 1.5fr 1fr; }
+.grade-meio { grid-template-columns: 1fr 1fr; }
+
+/* ---------- Indicadores ---------- */
+.indicadores { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 18px; }
+.indicadores.tres { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.indicador { padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; cursor: default; }
+.indicador[data-acao] { cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.indicador[data-acao]:hover { transform: translateY(-2px); box-shadow: var(--sombra-forte); }
+.indicador .topo-ind { display: flex; align-items: center; justify-content: space-between; color: var(--texto-2); font-size: 13.5px; font-weight: 500; }
+.indicador .icone { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--azul-suave); color: var(--azul); }
+.indicador .valor { font-size: 32px; font-weight: 700; color: var(--marinho); letter-spacing: -.03em; line-height: 1; }
+.indicador .nota { font-size: 12.5px; color: var(--texto-3); }
+.indicador.calor .icone { background: var(--calor-suave); color: var(--calor-texto); }
+.indicador.perigo .icone { background: var(--perigo-suave); color: var(--perigo); }
+.indicador.verde .icone { background: var(--verde-suave); color: var(--verde); }
+
+.barra { height: 8px; background: var(--azul-suave); border-radius: 999px; overflow: hidden; }
+.barra > i { display: block; height: 100%; background: var(--azul); border-radius: 999px; }
+.barra.cheia > i { background: var(--calor); }
+.barra.excedida > i { background: var(--perigo); }
+.cobertura { display: flex; align-items: center; gap: 22px; }
+.anel { --p: 0; width: 96px; height: 96px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center;
+  background: conic-gradient(var(--azul) calc(var(--p) * 1%), var(--azul-suave) 0); }
+.anel::after { content: attr(data-texto); width: 74px; height: 74px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-weight: 700; font-size: 20px; color: var(--marinho); }
+.legenda { display: grid; gap: 8px; font-size: 14px; }
+.legenda div { display: flex; align-items: center; gap: 8px; }
+.legenda i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+/* ---------- Listas ---------- */
+.lista { display: flex; flex-direction: column; }
+.linha { display: flex; align-items: center; gap: 14px; padding: 13px 22px; border-top: 1px solid var(--borda); }
+.lista > .linha:first-child { border-top: 0; }
+.linha.clicavel { cursor: pointer; transition: background .12s; }
+.linha.clicavel:hover { background: var(--azul-claro); }
+.linha .info { min-width: 0; flex: 1; }
+.linha .info b { display: block; font-weight: 600; color: var(--texto); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.linha .info small { color: var(--texto-2); font-size: 13px; }
+.linha .lado { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+.tabela-pessoas .linha { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.5fr) minmax(0, 1.3fr) minmax(0, 1fr) 44px; }
+.tabela-pessoas .cabeca { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--texto-3); font-weight: 600; padding-top: 14px; padding-bottom: 10px; }
+.pessoa-cel { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.resp-cel { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 14px; }
+.resp-cel span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.avatar { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-weight: 650; font-size: 13.5px; flex-shrink: 0; letter-spacing: .02em; }
+.avatar.p { width: 26px; height: 26px; font-size: 10.5px; }
+img.avatar { object-fit: cover; background: var(--azul-suave); display: block; }
+.avatar.mini { width: 24px; height: 24px; font-size: 9.5px; border: 2px solid #fff; }
+.cuida-de { display: flex; align-items: center; gap: 8px; margin-top: 3px; flex-wrap: wrap; }
+.pilha { display: inline-flex; }
+.pilha > span { margin-left: -6px; cursor: pointer; border-radius: 50%; }
+.pilha > span:first-child { margin-left: 0; }
+.pilha > span:hover { transform: translateY(-2px); position: relative; z-index: 1; }
+.pilha .mais { width: 24px; height: 24px; border-radius: 50%; background: var(--azul-suave); color: var(--azul-forte); font-size: 10px; font-weight: 700; display: grid; place-items: center; border: 2px solid #fff; cursor: default; }
+.foto-editavel { position: relative; border: 0; padding: 0; background: none; cursor: pointer; border-radius: 50%; flex-shrink: 0; }
+.foto-editavel .camera { position: absolute; right: -2px; bottom: -2px; width: 26px; height: 26px; border-radius: 50%; background: var(--azul); color: #fff; display: grid; place-items: center; border: 2px solid #fff; box-shadow: var(--sombra); }
+.foto-editavel .camera svg { width: 13px; height: 13px; }
+.foto-editavel:hover .avatar { filter: brightness(.94); }
+.ficha-topo .meta .avatar.p { width: 22px; height: 22px; font-size: 9px; }
+.avatar.g { width: 64px; height: 64px; font-size: 22px; }
+
+/* ---------- Badges ---------- */
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+.badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .85; }
+.badge.sem-ponto::before { display: none; }
+.b-azul { background: var(--azul-suave); color: var(--azul-forte); }
+.b-verde { background: var(--verde-suave); color: var(--verde); }
+.b-calor { background: var(--calor-suave); color: var(--calor-texto); }
+.b-perigo { background: var(--perigo-suave); color: var(--perigo); }
+.b-neutro { background: #EEF1F5; color: var(--texto-2); }
+.b-marinho { background: var(--marinho); color: #fff; }
+
+/* ---------- Botões ---------- */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; border: 1px solid transparent; font-weight: 600; font-size: 14.5px; cursor: pointer; transition: background .15s, box-shadow .15s, transform .05s; white-space: nowrap; }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+.btn-primario { background: var(--azul); color: #fff; box-shadow: 0 2px 8px rgba(58,114,184,.28); }
+.btn-primario:hover { background: var(--azul-forte); }
+.btn-secundario { background: #fff; border-color: var(--borda); color: var(--marinho); }
+.btn-secundario:hover { background: var(--azul-claro); border-color: #CFDAE7; }
+.btn-fantasma { background: transparent; color: var(--azul); }
+.btn-fantasma:hover { background: var(--azul-claro); }
+.btn-perigo { background: #fff; border-color: #F0CFCD; color: var(--perigo); }
+.btn-perigo:hover { background: var(--perigo-suave); }
+.btn-sm { padding: 7px 12px; font-size: 13.5px; border-radius: 9px; }
+.btn-icone { padding: 9px; border-radius: 10px; }
+.btn .spinner { width: 16px; height: 16px; border-width: 2px; border-color: rgba(255,255,255,.4); border-top-color: #fff; }
+.btn-secundario .spinner { border-color: var(--azul-suave); border-top-color: var(--azul); }
+
+/* ---------- Filtros e busca ---------- */
+.barra-ferramentas { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-bottom: 16px; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { border: 1px solid var(--borda); background: #fff; padding: 7px 13px; border-radius: 999px; cursor: pointer; font-weight: 500; font-size: 14px; color: var(--texto-2); display: inline-flex; gap: 7px; align-items: center; }
+.chip:hover { border-color: #C9D6E5; color: var(--marinho); }
+.chip.ativo { background: var(--marinho); border-color: var(--marinho); color: #fff; }
+.chip .n { font-size: 12px; font-weight: 700; opacity: .75; }
+.busca { position: relative; min-width: 260px; }
+.busca svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--texto-3); }
+.busca input { padding-left: 38px; }
+
+/* ---------- Formulários ---------- */
+.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.campo label, .rotulo { font-size: 13.5px; font-weight: 600; color: var(--marinho); }
+.campo .dica { font-size: 12.5px; color: var(--texto-3); }
+.input, select.input, textarea.input {
+  width: 100%; padding: 10px 13px; border: 1px solid #D5DEE9; border-radius: 10px; background: #fff;
+  transition: border-color .15s, box-shadow .15s; outline: none;
+}
+.input:focus { border-color: var(--azul); box-shadow: 0 0 0 4px rgba(58,114,184,.14); }
+textarea.input { resize: vertical; min-height: 78px; }
+.form-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+.form-grade .inteiro { grid-column: 1 / -1; }
+.secao-form { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--texto-3); font-weight: 700; margin: 6px 0 12px; grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; }
+.check { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--borda); border-radius: 10px; cursor: pointer; background: #fff; margin-bottom: 14px; }
+.check input { margin-top: 3px; accent-color: var(--azul); width: 16px; height: 16px; }
+.check.destaque { background: var(--azul-claro); border-color: #CFDDEE; }
+.segmentos { display: flex; gap: 6px; flex-wrap: wrap; }
+.segmentos label { cursor: pointer; }
+.segmentos input { position: absolute; opacity: 0; pointer-events: none; }
+.segmentos span { display: inline-flex; align-items: center; gap: 6px; padding: 8px 13px; border: 1px solid #D5DEE9; border-radius: 10px; font-weight: 500; font-size: 14px; background: #fff; }
+.segmentos input:checked + span { background: var(--azul-suave); border-color: var(--azul); color: var(--azul-forte); }
+.segmentos input:focus-visible + span { box-shadow: 0 0 0 4px rgba(58,114,184,.14); }
+.restrito { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--calor-texto); background: var(--calor-suave); padding: 6px 10px; border-radius: 8px; }
+
+/* ---------- Ficha ---------- */
+.ficha-topo { display: flex; gap: 20px; align-items: center; padding: 22px; flex-wrap: wrap; }
+.ficha-topo .dados { flex: 1; min-width: 220px; }
+.ficha-topo h1 { font-size: 24px; margin-bottom: 6px; }
+.ficha-topo .meta { display: flex; gap: 8px 16px; flex-wrap: wrap; align-items: center; color: var(--texto-2); font-size: 14px; }
+.ficha-topo .meta span { display: inline-flex; align-items: center; gap: 6px; }
+.ficha-acoes { display: flex; gap: 8px; flex-wrap: wrap; }
+.abas { display: flex; gap: 4px; border-bottom: 1px solid var(--borda); margin: 22px 0 18px; overflow-x: auto; scrollbar-width: none; }
+.aba { border: 0; background: none; padding: 11px 14px; cursor: pointer; font-weight: 600; color: var(--texto-2); border-bottom: 2.5px solid transparent; margin-bottom: -1px; white-space: nowrap; display: inline-flex; gap: 7px; align-items: center; }
+.aba:hover { color: var(--marinho); }
+.aba.ativa { color: var(--azul-forte); border-bottom-color: var(--azul); }
+.dl { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+.dl div small { display: block; font-size: 12.5px; color: var(--texto-3); font-weight: 500; margin-bottom: 2px; }
+.dl div p { font-weight: 500; }
+.dl .inteiro { grid-column: 1 / -1; }
+.proximo { display: flex; gap: 14px; align-items: center; padding: 16px; border-radius: 12px; background: var(--azul-claro); }
+.proximo .data-bloco { background: #fff; border-radius: 10px; padding: 8px 12px; text-align: center; min-width: 62px; box-shadow: var(--sombra); }
+.proximo .data-bloco b { display: block; font-size: 22px; color: var(--marinho); line-height: 1.1; }
+.proximo .data-bloco small { font-size: 11.5px; text-transform: uppercase; color: var(--texto-2); font-weight: 600; }
+
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before { content: ''; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 2px; background: var(--borda); }
+.evento { position: relative; margin-bottom: 16px; }
+.evento .marcador { position: absolute; left: -28px; top: 16px; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid var(--azul); display: grid; place-items: center; }
+.evento .marcador::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--azul); }
+.evento .card-corpo { padding: 16px 18px; }
+.evento-topo { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+.evento-topo .quando { font-size: 13px; color: var(--texto-2); display: flex; gap: 8px; align-items: center; }
+.evento h4 { font-size: 15.5px; margin-bottom: 8px; }
+.bloco-texto { margin-top: 10px; }
+.bloco-texto small { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--texto-3); font-weight: 700; }
+.bloco-texto p { white-space: pre-wrap; margin-top: 2px; }
+.bloco-texto.sensivel { background: var(--calor-suave); border-radius: 10px; padding: 10px 12px; }
+.bloco-texto.sensivel small { color: var(--calor-texto); }
+
+.etapas { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 8px; }
+.jornada-grafico { grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); }
+.tem-lembrete { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--calor-texto); font-weight: 600; }
+.lembrete { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 12px; background: var(--calor-suave); border: 1px solid #F1DDB8; color: var(--calor-texto); margin-bottom: 14px; }
+.lembrete > svg { width: 20px; height: 20px; }
+.lembrete div { flex: 1; }
+.lembrete b { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; }
+.lembrete p { color: var(--texto); font-weight: 500; }
+.lembrete.apoio { background: #E8EEF6; border-color: #C9D6E8; color: var(--marinho); }
+.numero-etapa { width: 30px; height: 30px; border-radius: 50%; background: var(--azul-suave); color: var(--azul-forte); display: grid; place-items: center; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+.etapa-opcao { position: relative; }
+.etapa-opcao input { position: absolute; opacity: 0; }
+.etapa-opcao span { display: flex; flex-direction: column; gap: 6px; padding: 12px; border: 1px solid var(--borda); border-radius: 12px; cursor: pointer; font-size: 13.5px; font-weight: 600; color: var(--texto-2); height: 100%; background: #fff; }
+.etapa-opcao span i { font-style: normal; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--azul-suave); color: var(--azul-forte); font-size: 12px; }
+.etapa-opcao input:checked + span { border-color: var(--azul); background: var(--azul-claro); color: var(--marinho); box-shadow: 0 0 0 3px rgba(58,114,184,.12); }
+.etapa-opcao input:checked + span i { background: var(--azul); color: #fff; }
+.marcos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.marcos .check { margin: 0; }
+
+/* ---------- Agenda ---------- */
+.grupo-agenda { margin-bottom: 22px; }
+.grupo-agenda > h3 { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; font-size: 15px; }
+.data-pilula { width: 58px; flex-shrink: 0; text-align: center; padding: 6px 8px; border-radius: 10px; background: var(--azul-claro); }
+.data-pilula b { display: block; font-size: 17px; color: var(--marinho); line-height: 1.1; }
+.data-pilula small { font-size: 10.5px; text-transform: uppercase; color: var(--texto-2); font-weight: 700; }
+.data-pilula.atrasada { background: var(--perigo-suave); }
+.data-pilula.atrasada b { color: var(--perigo); }
+
+/* ---------- Mapa de cuidado (equipe no painel) ---------- */
+.equipe-linha { display: grid; grid-template-columns: auto minmax(0,1fr) 120px; gap: 12px; align-items: center; padding: 12px 22px; border-top: 1px solid var(--borda); }
+.equipe-linha:first-child { border-top: 0; }
+.equipe-linha .carga { font-size: 13px; color: var(--texto-2); text-align: right; margin-bottom: 5px; }
+
+/* ---------- Estados vazios ---------- */
+.vazio { text-align: center; padding: 42px 24px; color: var(--texto-2); }
+.vazio .icone-vazio { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 14px; background: var(--azul-claro); color: var(--azul); }
+.vazio .icone-vazio svg { width: 24px; height: 24px; }
+.vazio h3 { margin-bottom: 4px; }
+
+/* ---------- Modal ---------- */
+.modal-fundo { position: fixed; inset: 0; background: rgba(15, 30, 52, .42); z-index: 100; display: grid; place-items: center; padding: 20px; animation: aparecer .15s ease-out; backdrop-filter: blur(2px); }
+.modal { background: #fff; border-radius: 18px; width: 100%; max-width: 560px; max-height: calc(100vh - 40px); display: flex; flex-direction: column; box-shadow: var(--sombra-forte); animation: subir .2s ease-out; }
+.modal.largo { max-width: 720px; }
+.modal-topo { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 22px 24px 8px; }
+.modal-topo p { margin-top: 3px; }
+.modal > form { display: flex; flex-direction: column; min-height: 0; flex: 1 1 auto; }
+.modal-corpo { padding: 14px 24px; overflow-y: auto; min-height: 0; flex: 1 1 auto; }
+.modal-rodape { display: flex; justify-content: flex-end; gap: 10px; padding: 14px 24px 20px; border-top: 1px solid var(--borda); }
+.senha-temp { font-family: ui-monospace, Menlo, monospace; font-size: 22px; font-weight: 700; letter-spacing: .08em; background: var(--azul-claro); color: var(--marinho); padding: 16px; border-radius: 12px; text-align: center; margin: 12px 0; user-select: all; }
+@keyframes aparecer { from { opacity: 0; } }
+@keyframes subir { from { transform: translateY(14px); opacity: 0; } }
+
+/* ---------- Toast ---------- */
+#toast-root { position: fixed; right: 22px; bottom: 22px; z-index: 200; display: flex; flex-direction: column; gap: 10px; }
+.toast { background: var(--marinho); color: #fff; padding: 12px 16px; border-radius: 12px; box-shadow: var(--sombra-forte); display: flex; gap: 10px; align-items: center; max-width: 380px; animation: subir .2s ease-out; font-weight: 500; font-size: 14px; }
+.toast.erro { background: var(--perigo); }
+.toast.ok svg { color: #9DDBC4; }
+
+/* ---------- Auditoria ---------- */
+.auditoria .linha { font-size: 14px; }
+.auditoria .quando { width: 128px; color: var(--texto-2); font-size: 13px; flex-shrink: 0; }
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+@media (max-width: 1080px) {
+  .indicadores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grade-2, .grade-meio { grid-template-columns: 1fr; }
+  .etapas { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 860px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .topo { padding: 12px 18px; padding-top: max(12px, env(safe-area-inset-top)); }
+  .topo-marca { display: flex; }
+  .topo-titulo { display: none; }
+  .topo .btn-nova span { display: none; }
+  .conteudo { padding: 4px 16px calc(96px + env(safe-area-inset-bottom)); }
+  .saudacao h1, h1 { font-size: 23px; }
+  .indicadores, .indicadores.tres { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .indicador { padding: 14px 16px; }
+  .indicador .valor { font-size: 26px; }
+  .indicadores.tres .indicador:last-child { grid-column: 1 / -1; }
+  .nav-movel {
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: rgba(255,255,255,.97);
+    border-top: 1px solid var(--borda); padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); backdrop-filter: blur(10px);
+  }
+  .nav-movel button { flex: 1; border: 0; background: none; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 2px; font-size: 11px; font-weight: 600; color: var(--texto-3); cursor: pointer; border-radius: 10px; position: relative; }
+  .nav-movel button svg { width: 22px; height: 22px; }
+  .nav-movel button.ativo { color: var(--azul-forte); }
+  .nav-movel button.ativo svg { stroke-width: 2.2; }
+  .nav-movel .contador { position: absolute; top: 2px; left: 54%; background: var(--calor); color: #3B2607; font-size: 10px; font-weight: 700; padding: 0 5px; border-radius: 999px; }
+  .tabela-pessoas .cabeca { display: none; }
+  .tabela-pessoas .linha { grid-template-columns: 1fr auto; gap: 8px 12px; padding: 14px 16px; }
+  .tabela-pessoas .linha > .col-resp { grid-column: 1 / -1; order: 3; padding-left: 50px; }
+  .tabela-pessoas .linha > .col-status { order: 2; }
+  .tabela-pessoas .linha > .col-ultimo, .tabela-pessoas .linha > .col-acoes { display: none; }
+  .linha { padding: 13px 16px; flex-wrap: wrap; row-gap: 8px; }
+  .linha .info { min-width: 55%; }
+  .lista .linha .lado { width: 100%; padding-left: 52px; justify-content: flex-start; flex-wrap: wrap; }
+  .lista .linha:has(.data-pilula) .lado { padding-left: 72px; }
+  .indicador .icone { display: none; }
+  .indicador .topo-ind { font-size: 13px; }
+  .card-topo { padding: 16px 16px 0; }
+  .card-corpo { padding: 16px; }
+  .equipe-linha { padding: 12px 16px; grid-template-columns: auto minmax(0,1fr) 90px; }
+  .barra-ferramentas { flex-direction: column; align-items: stretch; }
+  .busca { min-width: 0; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
+  .chip { flex-shrink: 0; }
+  .dl, .form-grade, .marcos { grid-template-columns: 1fr; }
+  .etapas { grid-template-columns: 1fr 1fr; }
+  .jornada-grafico { grid-template-columns: repeat(3, 1fr); }
+  .ficha-topo { padding: 18px; gap: 14px; }
+  .ficha-acoes { width: 100%; }
+  .ficha-acoes .btn-primario { flex: 1; justify-content: center; }
+  .modal-fundo { place-items: end stretch; padding: 0; }
+  .modal, .modal.largo { max-width: none; border-radius: 20px 20px 0 0; max-height: 92vh; }
+  .modal-rodape { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
+  .modal-rodape .btn { flex: 1; justify-content: center; }
+  #toast-root { left: 16px; right: 16px; bottom: calc(84px + env(safe-area-inset-bottom)); }
+  .login { grid-template-columns: 1fr; }
+  .login-arte { padding: 28px 24px 34px; min-height: auto; gap: 26px; }
+  .login-arte .frase { font-size: 32px; margin-bottom: 14px; }
+  .login-arte .traco { margin-bottom: 14px; }
+  .login-arte .versiculo { font-size: 14.5px; }
+  .login-arte h2.boas-vindas { font-size: 24px; }
+  .login-arte .rede-fundo { width: 300px; height: 300px; right: -150px; top: -20px; opacity: .4; }
+  .lembrete { flex-wrap: wrap; }
+  .login-arte .rodape { display: none; }
+  .login-form { place-items: start center; padding: 28px 22px 40px; }
+  .auditoria .quando { width: 92px; }
+  .so-desktop { display: none; }
+}
+</style>
+
+  </head>
+  <body>
+    <div id="app">
+      <div class="carregando-tela"><span class="spinner"></span></div>
+    </div>
+    <div id="modal-root"></div>
+    <div id="toast-root" aria-live="polite"></div>
+    <script>
+  // Endereço do servidor (Apps Script). Se publicar uma implantação nova, troque aqui.
+  window.API_URL = "https://script.google.com/macros/s/AKfycbx8KURhBCSB-PQ3kM5T-n345uWI9smsa63qSLF1Qmo24CXk5-S2fUeRChtcaFU1PQzY/exec";
+  window.APP_CONFIG = {};
+</script>
+    <script>
+(function () {
+  'use strict';
+
+  /* =========================================================
+     ESTADO E UTILITÁRIOS
+     ========================================================= */
+  var CFG = window.APP_CONFIG || {};
+  var S = { token: null, usuario: null, rota: 'painel', params: {}, seq: 0, ficha: null, abaFicha: 'geral', estudos: null, pendencias: 0 };
+  var CHAVE_TOKEN = 'consolidacao_token';
+
+  var store = {
+    get: function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { v == null ? sessionStorage.removeItem(k) : sessionStorage.setItem(k, v); } catch (e) {} }
+  };
+
+  function $(sel, raiz) { return (raiz || document).querySelector(sel); }
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function nomeDe(lista, id) {
+    for (var i = 0; i < (lista || []).length; i++) if (lista[i].id === id) return lista[i].nome;
+    return id || '';
+  }
+  function ehLid() { return S.usuario && S.usuario.perfil === 'LIDERANCA'; }
+  function ehAdm() { return S.usuario && S.usuario.perfil === 'ADM'; }
+  function veGeral() { return ehLid() || ehAdm(); }
+  function primeiroNome(n) { return String(n || '').trim().split(/\s+/)[0]; }
+  function iniciais(n) {
+    var p = String(n || '?').trim().split(/\s+/);
+    return ((p[0] || '')[0] + (p.length > 1 ? p[p.length - 1][0] : '')).toUpperCase();
+  }
+  var CORES = [['#E3EDF8', '#2F61A0'], ['#FCF2E2', '#94621A'], ['#E3F3EC', '#2E8467'], ['#ECE8F6', '#5B4A9E'], ['#FCE9E5', '#A8473A'], ['#E4F1F4', '#2D6F86']];
+  function avatar(nome, tam, foto) {
+    if (foto && /^data:image\/(jpeg|png|webp);base64,/.test(foto)) {
+      return '<img class="avatar ' + (tam || '') + '" src="' + esc(foto) + '" alt="">';
+    }
+    var h = 0, s = String(nome || '');
+    for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+    var c = CORES[h % CORES.length];
+    return '<span class="avatar ' + (tam || '') + '" style="background:' + c[0] + ';color:' + c[1] + '">' + esc(iniciais(nome)) + '</span>';
+  }
+
+  /* ---------- Datas ---------- */
+  function hojeISO() { return new Date().toLocaleDateString('sv-SE', { timeZone: CFG.fuso }); }
+  function somarDias(iso, n) { var d = new Date(iso.slice(0, 10) + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
+  function dias(iso) { // positivo = passado
+    if (!iso) return null;
+    return Math.round((Date.parse(hojeISO() + 'T00:00:00Z') - Date.parse(String(iso).slice(0, 10) + 'T00:00:00Z')) / 86400000);
+  }
+  function dataBR(iso) { if (!iso) return '—'; var p = String(iso).slice(0, 10).split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
+  function dataCurta(iso) { if (!iso) return '—'; var p = String(iso).slice(0, 10).split('-'); return p[2] + '/' + p[1]; }
+  function relativo(iso) {
+    var n = dias(iso);
+    if (n === null) return '—';
+    if (n === 0) return 'hoje';
+    if (n === 1) return 'ontem';
+    if (n === -1) return 'amanhã';
+    if (Math.abs(n) > 45) return dataBR(iso);
+    return n > 0 ? 'há ' + n + ' dias' : 'em ' + (-n) + ' dias';
+  }
+  var MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  function pilulaData(iso, atrasada) {
+    if (!iso) return '<div class="data-pilula ' + (atrasada ? 'atrasada' : '') + '"><b>!</b><small>sem data</small></div>';
+    var p = String(iso).slice(0, 10).split('-');
+    return '<div class="data-pilula ' + (atrasada ? 'atrasada' : '') + '"><b>' + p[2] + '</b><small>' + MESES[Number(p[1]) - 1] + '</small></div>';
+  }
+  function saudacao() {
+    var h = Number(new Date().toLocaleString('en-US', { hour: 'numeric', hour12: false, timeZone: CFG.fuso }));
+    return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+  }
+  function dataExtenso() {
+    var s = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', timeZone: CFG.fuso });
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+  function linkWhats(tel) {
+    var d = String(tel || '').replace(/\D/g, '');
+    if (!d) return '';
+    if (d.length <= 11) d = '55' + d;
+    return 'https://wa.me/' + d;
+  }
+
+  /* ---------- Ícones (traço) ---------- */
+  var ICONES = {
+    home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/>',
+    heart: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/>',
+    calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+    users: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+    user: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+    userPlus: '<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/>',
+    idCard: '<rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="11" r="2"/><path d="M5 16c.6-1.4 1.7-2 3-2s2.4.6 3 2M14 10h5M14 14h3"/>',
+    shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+    logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    search: '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
+    phone: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',
+    message: '<path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    check: '<path d="M20 6 9 17l-5-5"/>',
+    alert: '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>',
+    x: '<path d="M18 6 6 18M6 6l12 12"/>',
+    left: '<path d="M19 12H5M12 19l-7-7 7-7"/>',
+    more: '<circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>',
+    lock: '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+    book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+    swap: '<path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>',
+    archive: '<path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/>',
+    edit: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+    key: '<circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/>',
+    camera: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
+    up: '<path d="M18 15l-6-6-6 6"/>',
+    down: '<path d="M6 9l6 6 6-6"/>',
+    flag: '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/>',
+    route: '<circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/>',
+    pin: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+    hand: '<path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-6-2.4l-3.6-3.6a2 2 0 0 1 2.8-2.8L7 15"/>'
+  };
+  function ic(nome, extra) { return '<svg class="ic" viewBox="0 0 24 24" ' + (extra || '') + '>' + (ICONES[nome] || '') + '</svg>'; }
+
+  /** Símbolo: a rede lançada (Lucas 5:4 · Mateus 4:19), desenhada em malha de losangos. */
+  var cacheRede = {};
+  function malhaRede(fundo) {
+    var chave = fundo ? 'f' : 'n';
+    if (cacheRede[chave]) return cacheRede[chave];
+    var C = [30, 11], Q = [17, 28], T = [24, 44], rx = 13, ry = 4.2, ang = -0.2;
+    var co = Math.cos(ang), si = Math.sin(ang);
+    var eixo = function (t) { var a = (1 - t) * (1 - t), b = 2 * (1 - t) * t, c = t * t; return [a * C[0] + b * Q[0] + c * T[0], a * C[1] + b * Q[1] + c * T[1]]; };
+    var escala = function (t) { return (1 + 0.28 * Math.sin(Math.PI * t * 0.9)) * Math.pow(Math.max(0, 1 - Math.pow(t, 2.6)), 0.6); };
+    var P = function (th, t) { var A = eixo(t), e = escala(t), x = rx * e * Math.cos(th), y = ry * e * Math.sin(th) * (1 + t * 0.8); return [A[0] + x * co - y * si, A[1] + x * si + y * co]; };
+    var lin = function (pts) { return 'M' + pts.map(function (q) { return q[0].toFixed(2) + ' ' + q[1].toFixed(2); }).join(' L'); };
+    var d = '', N = fundo ? 11 : 8, giro = 2.4;
+    [1, -1].forEach(function (sentido) {
+      for (var i = -8; i <= N + 8; i++) {
+        var seg = [];
+        for (var k = 0; k <= 40; k++) {
+          var t = k / 40, th = i / N * Math.PI + sentido * giro * t;
+          if (th >= 0 && th <= Math.PI) seg.push(P(th, t));
+          else { if (seg.length > 1) d += lin(seg); seg = []; }
+        }
+        if (seg.length > 1) d += lin(seg);
+      }
+    });
+    var borda = [], k2;
+    for (k2 = 0; k2 <= 30; k2++) borda.push(P(0, k2 / 30));
+    for (k2 = 30; k2 >= 0; k2--) borda.push(P(Math.PI, k2 / 30));
+    var aro = [];
+    for (k2 = 0; k2 <= 60; k2++) aro.push(P(k2 / 60 * Math.PI * 2, 0));
+    return (cacheRede[chave] = { malha: d + lin(borda), aro: lin(aro) + 'Z' });
+  }
+  function rede(tam, claro, extra, fundo) {
+    var m = malhaRede(fundo);
+    var corMalha = fundo ? '#BBA7E8' : (claro ? '#A9CBF0' : '#5B8CC8'), corAro = fundo ? '#CDBDF2' : (claro ? '#FFFFFF' : '#1D3557');
+    var ve = fundo ? ' vector-effect="non-scaling-stroke"' : '';
+    return '<svg width="' + tam + '" height="' + tam + '" viewBox="0 0 48 48" aria-hidden="true" ' + (extra || '') + '>' +
+      '<path' + ve + ' d="' + m.malha + '" fill="none" stroke="' + corMalha + '" stroke-width="' + (fundo ? 1.4 : 0.65) + '" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<path' + ve + ' d="' + m.aro + '" fill="none" stroke="' + corAro + '" stroke-width="' + (fundo ? 3 : 1.8) + '"/></svg>';
+  }
+  function logo(tam, claro) { return rede(tam, claro); }
+
+  /** Rede de lançar (tarrafa) aberta no ar — usada ao fundo do login. */
+  function tarrafa(extra) {
+    var A = [24, 5], C = [24, 33], rx = 21, ry = 6.5, R = 26, aneis = [0.22, 0.4, 0.58, 0.76, 0.9, 1];
+    var pt = function (i, f) {
+      var th = i / R * Math.PI * 2, x = C[0] + rx * Math.cos(th), y = C[1] + ry * Math.sin(th);
+      return [A[0] + (x - A[0]) * f, A[1] + (y - A[1]) * f + Math.sin(Math.PI * f) * 2.2];
+    };
+    var f2 = function (p) { return p[0].toFixed(2) + ' ' + p[1].toFixed(2); };
+    var d = '', i, k, pesos = '';
+    for (i = 0; i < R; i++) { var p = []; for (k = 0; k <= 12; k++) p.push(pt(i, k / 12)); d += 'M' + p.map(f2).join(' L'); }
+    aneis.forEach(function (f, n) {
+      for (var j = 0; j < R; j++) {
+        var a = pt(j, f), b = pt(j + 1, f);
+        d += 'M' + f2(a) + ' Q' + f2([(a[0] + b[0]) / 2, (a[1] + b[1]) / 2 + 0.9 * f + (n === aneis.length - 1 ? 0.8 : 0)]) + ' ' + f2(b);
+      }
+    });
+    for (i = 0; i < R; i++) { var q = pt(i, 1); pesos += '<circle cx="' + q[0].toFixed(2) + '" cy="' + (q[1] + 0.4).toFixed(2) + '" r="0.42"/>'; }
+    return '<svg viewBox="0 0 48 48" aria-hidden="true" ' + (extra || '') + '>' +
+      '<path d="M24 5 C27 2.5 33 1.5 40 0" fill="none" stroke="#F3C98B" stroke-width="1.2" vector-effect="non-scaling-stroke"/>' +
+      '<path d="' + d + '" fill="none" stroke="#A9CBF0" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linecap="round"/>' +
+      '<g fill="#F3C98B">' + pesos + '</g></svg>';
+  }
+  function marca(tam, claro) {
+    return '<div class="marca-texto"><div><b>' + esc(CFG.appNome) + '</b><span>' + esc(CFG.appSubtitulo) + '</span></div></div>';
+  }
+
+  /* ---------- Rótulos de status ---------- */
+  var STATUS = {
+    SEM_RESPONSAVEL: ['Sem responsável', 'b-calor'],
+    PRIMEIRO_CONTATO: ['Aguardando 1º contato', 'b-azul'],
+    ATRASADO: ['Contato atrasado', 'b-perigo'],
+    EM_DIA: ['Em dia', 'b-verde'],
+    ARQUIVADA: ['Arquivada', 'b-neutro'],
+    COM_RESPONSAVEL: ['Em acompanhamento', 'b-azul']
+  };
+  function badgeStatus(s) { var b = STATUS[s] || [s, 'b-neutro']; return '<span class="badge ' + b[1] + '">' + esc(b[0]) + '</span>'; }
+  function badgeEtapa(e) { return '<span class="badge b-neutro sem-ponto">' + esc(nomeDe(CFG.etapas, e)) + '</span>'; }
+
+  function vazio(icone, titulo, texto, botao) {
+    return '<div class="vazio"><div class="icone-vazio">' + ic(icone) + '</div><h3>' + esc(titulo) + '</h3><p>' + esc(texto) + '</p>' + (botao || '') + '</div>';
+  }
+  function carregandoHtml() { return '<div class="carregando"><span class="spinner"></span></div>'; }
+
+  /* ---------- Fotos ---------- */
+  function fotoEditavel(nome, foto, id) {
+    return '<button type="button" class="foto-editavel" data-acao="trocar-foto" data-id="' + esc(id) + '" data-tem="' + (foto ? '1' : '') + '" title="Trocar foto">' +
+      avatar(nome, 'g', foto) + '<span class="camera">' + ic('camera') + '</span></button>';
+  }
+
+  /** Abre a câmera/galeria, recorta em quadrado e reduz para 160 x 160 antes de enviar. */
+  function escolherImagem() {
+    return new Promise(function (resolve) {
+      var inp = document.createElement('input');
+      inp.type = 'file'; inp.accept = 'image/*';
+      inp.onchange = function () {
+        var arq = inp.files && inp.files[0];
+        if (!arq) return resolve(null);
+        var leitor = new FileReader();
+        leitor.onload = function () {
+          var img = new Image();
+          img.onload = function () {
+            var lado = Math.min(img.width, img.height), tam = 160;
+            var cv = document.createElement('canvas');
+            cv.width = cv.height = tam;
+            cv.getContext('2d').drawImage(img, (img.width - lado) / 2, (img.height - lado) / 2, lado, lado, 0, 0, tam, tam);
+            var q = 0.85, url = cv.toDataURL('image/jpeg', q);
+            while (url.length > 40000 && q > 0.4) { q -= 0.1; url = cv.toDataURL('image/jpeg', q); }
+            resolve(url);
+          };
+          img.onerror = function () { toast('Não foi possível ler esta imagem.', 'erro'); resolve(null); };
+          img.src = leitor.result;
+        };
+        leitor.readAsDataURL(arq);
+      };
+      inp.click();
+    });
+  }
+
+  async function trocarFoto(id, temFoto) {
+    var acao = 'nova';
+    if (temFoto) {
+      acao = await new Promise(function (resolve) {
+        abrirModal({
+          titulo: 'Foto', corpo: '<p class="muted">Escolha uma nova foto ou remova a atual.</p>',
+          rodape: '<button type="button" class="btn btn-perigo" id="foto-remover">' + ic('x') + ' Remover</button>' +
+            '<button type="button" class="btn btn-primario" id="foto-nova">' + ic('camera') + ' Escolher nova</button>'
+        });
+        $('#foto-remover').onclick = function () { fecharModal(); resolve('remover'); };
+        $('#foto-nova').onclick = function () { fecharModal(); resolve('nova'); };
+      });
+    }
+    try {
+      var foto = '';
+      if (acao === 'remover') await chamar('fotos.remover', { id: id });
+      else {
+        foto = await escolherImagem();
+        if (!foto) return;
+        await chamar('fotos.salvar', { id: id, dados: foto });
+      }
+      toast(foto ? 'Foto atualizada.' : 'Foto removida.');
+      if (id === S.usuario.id) {
+        S.usuario.foto = foto;
+        var a1 = $('.cartao-usuario .avatar'), a2 = $('.topo-acoes .avatar');
+        if (a1) a1.outerHTML = avatar(S.usuario.nome, '', foto);
+        if (a2) a2.outerHTML = avatar(S.usuario.nome, 'p', foto);
+      }
+      renderView();
+    } catch (e) { toast(e.message, 'erro'); }
+  }
+
+  /* =========================================================
+     COMUNICAÇÃO COM O SERVIDOR (uma única porta: api)
+     ========================================================= */
+  /**
+   * Transporte: dentro do Apps Script usa google.script.run;
+   * hospedado fora (GitHub Pages) usa fetch para o endereço /exec (window.API_URL).
+   */
+  function transporte(acao, dados) {
+    if (window.API_URL) {
+      return fetch(window.API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // evita a checagem prévia de CORS
+        body: JSON.stringify({ token: S.token, acao: acao, dados: dados || {} }),
+        redirect: 'follow'
+      }).then(function (resp) {
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        return resp.json();
+      });
+    }
+    return new Promise(function (resolve, reject) {
+      google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).api(S.token, acao, dados || {});
+    });
+  }
+
+  /*
+   * Memória rápida das telas: leituras repetidas em até 60 s voltam na hora,
+   * pedidos iguais em andamento são reaproveitados e qualquer gravação limpa tudo.
+   */
+  var LEITURAS = { 'painel.ver': 1, 'pessoas.listar': 1, 'agenda.ver': 1, 'etapas.listar': 1, 'equipe.listar': 1, 'equipe.opcoes': 1, 'estudos.listar': 1, 'auditoria.listar': 1 };
+  var memoria = {};
+  function limparMemoria() { memoria = {}; }
+
+  function chamar(acao, dados) {
+    if (!LEITURAS[acao]) {
+      return chamarServidor(acao, dados).then(function (r) { limparMemoria(); return r; });
+    }
+    var chave = acao + '|' + JSON.stringify(dados || {});
+    var m = memoria[chave];
+    if (m && Date.now() - m.t < 60000) return m.p;
+    var p = chamarServidor(acao, dados);
+    memoria[chave] = { t: Date.now(), p: p };
+    p.catch(function () { if (memoria[chave] && memoria[chave].p === p) delete memoria[chave]; });
+    return p;
+  }
+
+  /** Adianta as telas principais em segundo plano (não trava nada). */
+  function adiantar() {
+    var silencioso = function () {};
+    if (ehLid() || ehAdm()) chamar('pessoas.listar', { filtro: 'ativas' }).catch(silencioso);
+    else chamar('pessoas.listar', { filtro: 'minhas' }).catch(silencioso);
+    chamar('agenda.ver').catch(silencioso);
+  }
+
+  function chamarServidor(acao, dados) {
+    return transporte(acao, dados).then(function (r) {
+      if (r && r.ok) return r.dados;
+      var e = new Error((r && r.erro) || 'Não foi possível concluir.');
+      e.codigo = r && r.codigo;
+      e.doServidor = true;
+      if (e.codigo === 'SESSAO' && S.usuario) encerrarSessao('Sua sessão expirou. Entre novamente.');
+      if (e.codigo === 'TROCAR_SENHA' && S.usuario) renderTrocaObrigatoria();
+      throw e;
+    }, function () {
+      throw new Error('Falha de conexão. Verifique sua internet e tente novamente.');
+    });
+  }
+
+  /** Repete a chamada após confirmação quando o servidor pede (duplicidade, capacidade). */
+  async function chamarComConfirmacao(acao, dados) {
+    for (var i = 0; i < 3; i++) {
+      try {
+        return await chamar(acao, dados);
+      } catch (e) {
+        if (e.codigo === 'DUPLICADO' && await confirmar(e.message, 'Deseja cadastrar mesmo assim?', 'Cadastrar mesmo assim')) { dados.ignorarDuplicado = true; continue; }
+        if (e.codigo === 'CAPACIDADE' && await confirmar(e.message, 'Deseja atribuir mesmo assim, acima da capacidade definida?', 'Atribuir mesmo assim')) { dados.ignorarCapacidade = true; continue; }
+        if (e.codigo === 'DUPLICADO' || e.codigo === 'CAPACIDADE') { e.cancelado = true; }
+        throw e;
+      }
+    }
+  }
+
+  /* =========================================================
+     COMPONENTES: toast, modal, confirmação
+     ========================================================= */
+  function toast(msg, tipo) {
+    var t = document.createElement('div');
+    t.className = 'toast ' + (tipo || 'ok');
+    t.innerHTML = ic(tipo === 'erro' ? 'alert' : 'check') + '<span>' + esc(msg) + '</span>';
+    $('#toast-root').appendChild(t);
+    setTimeout(function () { t.remove(); }, tipo === 'erro' ? 5000 : 3200);
+  }
+
+  function carregandoBtn(btn, on) {
+    if (!btn) return;
+    if (on) { btn.dataset.html = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Aguarde…'; }
+    else if (btn.dataset.html) { btn.disabled = false; btn.innerHTML = btn.dataset.html; }
+  }
+
+  function lerForm(form) {
+    var o = {};
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name || el.disabled) return;
+      if (el.type === 'checkbox') {
+        if (el.dataset.grupo) { o[el.dataset.grupo] = o[el.dataset.grupo] || {}; o[el.dataset.grupo][el.name] = el.checked; }
+        else o[el.name] = el.checked;
+      } else if (el.type === 'radio') { if (el.checked) o[el.name] = el.value; }
+      else o[el.name] = el.value.trim();
+    });
+    return o;
+  }
+
+  function fecharModal() { $('#modal-root').innerHTML = ''; }
+
+  function abrirModal(op) {
+    var root = $('#modal-root');
+    root.innerHTML =
+      '<div class="modal-fundo"><div class="modal ' + (op.largo ? 'largo' : '') + '" role="dialog" aria-modal="true">' +
+      '<form id="modal-form" novalidate>' +
+      '<div class="modal-topo"><div><h2>' + esc(op.titulo) + '</h2>' + (op.subtitulo ? '<p class="muted small">' + esc(op.subtitulo) + '</p>' : '') + '</div>' +
+      '<button type="button" class="btn btn-fantasma btn-icone" data-acao="fechar-modal" aria-label="Fechar">' + ic('x') + '</button></div>' +
+      '<div class="modal-corpo">' + op.corpo + '</div>' +
+      '<div class="modal-rodape">' + (op.rodape != null ? op.rodape :
+        '<button type="button" class="btn btn-secundario" data-acao="fechar-modal">Cancelar</button>' +
+        '<button type="submit" class="btn btn-primario">' + (op.botao || 'Salvar') + '</button>') + '</div>' +
+      '</form></div></div>';
+    var form = $('#modal-form');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (!op.enviar) return;
+      var btn = form.querySelector('[type=submit]');
+      carregandoBtn(btn, true);
+      try { await op.enviar(lerForm(form), form); }
+      catch (err) { if (!err.cancelado) toast(err.message, 'erro'); }
+      finally { if (document.body.contains(btn)) carregandoBtn(btn, false); }
+    });
+    root.firstChild.addEventListener('mousedown', function (e) { if (e.target === root.firstChild) fecharModal(); });
+    if (op.aoAbrir) op.aoAbrir(form);
+    var primeiro = form.querySelector('.modal-corpo input:not([type=hidden]):not([disabled]):not([type=radio]):not([type=checkbox]):not([type=date]), .modal-corpo textarea');
+    if (primeiro && window.innerWidth > 860) primeiro.focus();
+    return form;
+  }
+
+  function confirmar(titulo, texto, botao, perigo) {
+    return new Promise(function (resolve) {
+      var camada = document.createElement('div');
+      camada.className = 'modal-fundo';
+      camada.style.zIndex = 150;
+      camada.innerHTML = '<div class="modal" role="alertdialog" style="max-width:440px"><div class="modal-topo"><div><h2>' + esc(titulo) + '</h2></div></div>' +
+        '<div class="modal-corpo"><p class="muted">' + esc(texto || '') + '</p></div>' +
+        '<div class="modal-rodape"><button class="btn btn-secundario" data-r="0">Voltar</button>' +
+        '<button class="btn ' + (perigo ? 'btn-perigo' : 'btn-primario') + '" data-r="1">' + esc(botao || 'Confirmar') + '</button></div></div>';
+      camada.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-r]');
+        if (!b && e.target !== camada) return;
+        camada.remove();
+        resolve(!!b && b.dataset.r === '1');
+      });
+      document.body.appendChild(camada);
+    });
+  }
+
+  /* ---------- Campos de formulário ---------- */
+  function campo(rotulo, html, dica, classe) {
+    return '<div class="campo ' + (classe || '') + '"><label>' + rotulo + '</label>' + html + (dica ? '<span class="dica">' + esc(dica) + '</span>' : '') + '</div>';
+  }
+  function input(nome, valor, attrs) {
+    return '<input class="input" name="' + nome + '" value="' + esc(valor) + '" ' + (attrs || '') + '>';
+  }
+  function textarea(nome, valor, attrs) {
+    return '<textarea class="input" name="' + nome + '" ' + (attrs || '') + '>' + esc(valor) + '</textarea>';
+  }
+  function select(nome, lista, valor, vazioTxt) {
+    return '<select class="input" name="' + nome + '">' + (vazioTxt != null ? '<option value="">' + esc(vazioTxt) + '</option>' : '') +
+      lista.map(function (o) { return '<option value="' + esc(o.id) + '"' + (o.id === valor ? ' selected' : '') + '>' + esc(o.nome) + '</option>'; }).join('') + '</select>';
+  }
+  function segmentos(nome, lista, valor) {
+    return '<div class="segmentos">' + lista.map(function (o) {
+      return '<label><input type="radio" name="' + nome + '" value="' + esc(o.id) + '"' + (o.id === valor ? ' checked' : '') + '><span>' + esc(o.nome) + '</span></label>';
+    }).join('') + '</div>';
+  }
+
+  /* =========================================================
+     LOGIN E SESSÃO
+     ========================================================= */
+  function renderLogin(aviso) {
+    S.usuario = null;
+    $('#app').innerHTML =
+      '<div class="login">' +
+      '<section class="login-arte">' +
+      rede(600, true, 'class="rede-fundo"', true) + '<div></div>' +
+      '<div class="frase-bloco"><span class="traco"></span><h2 class="frase">Ele diz para<br>lançarmos <em>a rede.</em></h2>' +
+      '<p class="versiculo">“E disse-lhes: Vinde após mim, e eu vos farei pescadores de homens.”</p><p class="referencia">Mateus 4:19</p></div>' +
+      '<div class="rodape">' + esc(CFG.igrejaNome) + ' · Sistema interno de consolidação</div>' +
+      '</section>' +
+      '<section class="login-form"><form class="login-card" id="form-login" novalidate>' +
+      '<h1>Que bom ter você aqui</h1><p class="muted">Entre com seu e-mail e senha para continuar.</p>' +
+      (aviso ? '<p class="restrito" style="margin-bottom:16px">' + ic('alert') + esc(aviso) + '</p>' : '') +
+      campo('E-mail', input('email', '', 'type="email" autocomplete="username" required placeholder="seu@email.com"')) +
+      campo('Senha', input('senha', '', 'type="password" autocomplete="current-password" required placeholder="••••••••"')) +
+      '<button class="btn btn-primario" type="submit">Entrar</button>' +
+      '<p style="text-align:center;margin-top:14px"><a href="#" data-acao="pedir-senha" class="small">Esqueci minha senha</a></p>' +
+      '<p class="aviso-restrito">' + ic('lock') + '<span>Acesso restrito à liderança e à equipe de consolidação. As informações aqui são confidenciais.</span></p>' +
+      '</form></section></div>';
+    var form = $('#form-login');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('button');
+      carregandoBtn(btn, true);
+      try {
+        var r = await chamar('auth.login', lerForm(form));
+        S.token = r.token; S.usuario = r.usuario;
+        store.set(CHAVE_TOKEN, r.token);
+        if (r.usuario.trocarSenha) renderTrocaObrigatoria(); else entrar();
+      } catch (err) {
+        carregandoBtn(btn, false);
+        toast(err.message, 'erro');
+      }
+    });
+    if (window.innerWidth > 860) form.email.focus();
+  }
+
+  function modalPedirSenha() {
+    abrirModal({
+      titulo: 'Pedir nova senha', subtitulo: 'Escolha uma nova senha. Ela passa a valer depois que for aprovada.', botao: 'Enviar pedido',
+      corpo: campo('Seu e-mail de acesso', input('email', ($('#form-login') && $('#form-login').email.value) || '', 'type="email" autocomplete="username"')) +
+        campo('Nova senha', input('nova', '', 'type="password" autocomplete="new-password"'), 'Pelo menos ' + CFG.senhaMin + ' caracteres.') +
+        campo('Repita a nova senha', input('confirmacao', '', 'type="password" autocomplete="new-password"')) +
+        '<p class="small muted">Pedidos de consolidadores são aprovados pela liderança. Pedidos da liderança são aprovados pela administração.</p>',
+      enviar: async function (f) {
+        if (f.nova !== f.confirmacao) throw new Error('As senhas não conferem.');
+        await chamar('auth.solicitarSenha', { email: f.email, nova: f.nova });
+        abrirModal({
+          titulo: 'Pedido enviado', corpo: '<p class="muted">Assim que for aprovado, você já pode entrar com a nova senha. Se precisar de pressa, avise a sua liderança.</p>',
+          rodape: '<button type="button" class="btn btn-primario" data-acao="fechar-modal">Entendi</button>'
+        });
+      }
+    });
+  }
+
+  function renderTrocaObrigatoria() {
+    $('#app').innerHTML =
+      '<div class="login"><section class="login-arte">' + rede(600, true, 'class="rede-fundo"', true) + '<div></div>' +
+      '<div class="frase-bloco"><h2 class="boas-vindas">Seja bem-vindo(a), ' + esc(primeiroNome(S.usuario.nome)) + '!</h2><p class="versiculo">Antes de começar, crie uma senha pessoal. Ela protege as informações das pessoas que você vai acompanhar.</p></div><div class="rodape"></div></section>' +
+      '<section class="login-form"><form class="login-card" id="form-troca" novalidate><h1>Crie sua senha</h1><p class="muted">Use pelo menos ' + CFG.senhaMin + ' caracteres.</p>' +
+      campo('Senha temporária recebida', input('atual', '', 'type="password" autocomplete="current-password"')) +
+      campo('Nova senha', input('nova', '', 'type="password" autocomplete="new-password"')) +
+      campo('Repita a nova senha', input('confirmacao', '', 'type="password" autocomplete="new-password"')) +
+      '<button class="btn btn-primario" type="submit">Salvar e entrar</button>' +
+      '<p class="aviso-restrito"><a href="#" data-acao="sair">Sair</a></p></form></section></div>';
+    var form = $('#form-troca');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var d = lerForm(form);
+      if (d.nova !== d.confirmacao) return toast('As senhas não conferem.', 'erro');
+      var btn = form.querySelector('button');
+      carregandoBtn(btn, true);
+      try {
+        await chamar('auth.trocarSenha', d);
+        S.usuario.trocarSenha = false;
+        toast('Senha criada com sucesso!');
+        entrar();
+      } catch (err) { carregandoBtn(btn, false); toast(err.message, 'erro'); }
+    });
+  }
+
+  function encerrarSessao(aviso) {
+    limparMemoria();
+    store.set(CHAVE_TOKEN, null);
+    S.token = null; S.usuario = null;
+    fecharModal();
+    if (CFG.authModo === 'GOOGLE') { $('#app').innerHTML = vazio('lock', 'Sessão encerrada', aviso || 'Recarregue a página para entrar novamente.'); return; }
+    renderLogin(aviso);
+  }
+
+  async function sair() {
+    try { await chamar('auth.logout'); } catch (e) {}
+    encerrarSessao();
+  }
+
+  /* =========================================================
+     ESTRUTURA (menu lateral, topo, navegação no celular)
+     ========================================================= */
+  var TITULOS = { painel: 'Painel', pessoas: 'Pessoas', pessoa: 'Ficha de acompanhamento', agenda: 'Agenda', jornada: 'Jornada', equipe: 'Equipe', historico: 'Histórico', conta: 'Minha conta' };
+
+  function itensMenu() {
+    if (ehAdm()) {
+      return [
+        { rota: 'painel', nome: 'Painel', icone: 'home' },
+        { rota: 'pessoas', nome: 'Pessoas', icone: 'heart' },
+        { rota: 'agenda', nome: 'Agenda', icone: 'calendar' },
+        { titulo: 'Administração' },
+        { rota: 'equipe', nome: 'Equipe e acessos', icone: 'key' },
+        { rota: 'historico', nome: 'Histórico', icone: 'clock' }
+      ];
+    }
+    if (ehLid()) {
+      return [
+        { rota: 'painel', nome: 'Painel', icone: 'home' },
+        { rota: 'pessoas', nome: 'Pessoas', icone: 'heart', contador: true },
+        { rota: 'agenda', nome: 'Agenda', icone: 'calendar' },
+        { titulo: 'Administração' },
+        { rota: 'jornada', nome: 'Jornada', icone: 'route' },
+        { rota: 'equipe', nome: 'Equipe', icone: 'users' },
+        { rota: 'historico', nome: 'Histórico', icone: 'clock' }
+      ];
+    }
+    return [
+      { rota: 'painel', nome: 'Meu painel', curto: 'Início', icone: 'home' },
+      { rota: 'pessoas', nome: 'Pessoas', icone: 'heart' },
+      { rota: 'agenda', nome: 'Agenda', icone: 'calendar' }
+    ];
+  }
+
+  async function entrar() {
+    var u = S.usuario;
+    $('#app').innerHTML = '<div class="carregando-tela"><span class="spinner"></span></div>';
+    chamar('painel.ver').catch(function () {}); // começa já, junto com as etapas
+    try { CFG.etapas = await chamar('etapas.listar'); } catch (e) { CFG.etapas = []; }
+    var menu = itensMenu();
+    var movel = veGeral()
+      ? [menu[0], menu[1], menu[2], { rota: '_mais', nome: 'Mais', icone: 'more' }]
+      : [menu[0], menu[1], menu[2], { rota: 'conta', nome: 'Conta', icone: 'user' }];
+    $('#app').innerHTML =
+      '<div class="app">' +
+      '<aside class="sidebar"><div class="marca">' + marca(40, true) + '</div>' +
+      '<nav class="nav">' + menu.map(function (m) {
+        if (m.titulo) return '<div class="nav-titulo">' + esc(m.titulo) + '</div>';
+        return '<button class="nav-item" data-acao="ir" data-rota="' + m.rota + '">' + ic(m.icone) + '<span>' + esc(m.nome) + '</span>' + (m.contador ? '<span class="contador oculto" data-contador></span>' : '') + '</button>';
+      }).join('') + '</nav>' +
+      '<div class="sidebar-rodape"><button class="cartao-usuario" data-acao="ir" data-rota="conta">' + avatar(u.nome, '', u.foto) +
+      '<div style="min-width:0"><b style="font-weight:600">' + esc(u.nome) + '</b><small>' + esc(nomeDe(CFG.perfis, u.perfil)) + '</small></div></button>' +
+      '<button class="nav-item" data-acao="sair" style="width:100%;margin-top:4px">' + ic('logout') + '<span>Sair</span></button></div>' +
+      '</aside>' +
+      '<div class="principal"><header class="topo" id="topo">' +
+      '<div class="topo-marca">' + marca(30, false) + '</div>' +
+      '<div class="topo-titulo" id="topo-titulo"></div>' +
+      '<div class="topo-acoes">' + (ehLid() ? '<button class="btn btn-primario btn-sm btn-nova" data-acao="nova-pessoa">' + ic('plus') + '<span>Cadastrar pessoa</span></button>' : '') +
+      '<button class="btn btn-fantasma btn-icone" data-acao="ir" data-rota="conta" aria-label="Minha conta" style="padding:2px">' + avatar(u.nome, 'p', u.foto) + '</button></div>' +
+      '</header><main class="conteudo" id="view"></main></div>' +
+      '<nav class="nav-movel">' + movel.map(function (m) {
+        return '<button data-acao="ir" data-rota="' + m.rota + '">' + ic(m.icone) + '<span>' + esc(m.curto || m.nome) + '</span>' + (m.contador ? '<span class="contador oculto" data-contador></span>' : '') + '</button>';
+      }).join('') + '</nav></div>';
+    ir('painel');
+    setTimeout(adiantar, 300);
+  }
+
+  function atualizarNav() {
+    var rotaMenu = S.rota === 'pessoa' ? 'pessoas' : S.rota;
+    document.querySelectorAll('.nav-item[data-rota], .nav-movel button').forEach(function (b) {
+      var alvo = b.dataset.rota;
+      var ativo = alvo === rotaMenu || (alvo === '_mais' && ['equipe', 'historico', 'jornada', 'conta'].indexOf(rotaMenu) >= 0);
+      b.classList.toggle('ativo', ativo);
+    });
+    var t = $('#topo-titulo');
+    if (t) t.textContent = TITULOS[S.rota] || '';
+  }
+
+  function atualizarContador(n) {
+    S.pendencias = n;
+    document.querySelectorAll('[data-contador]').forEach(function (c) {
+      c.textContent = n;
+      c.classList.toggle('oculto', !n);
+    });
+  }
+
+  var VIEWS = {};
+  function ir(rota, params) {
+    if (rota === '_mais') return menuMais();
+    if (rota === 'pessoa' && (!S.params || S.params.id !== (params || {}).id)) S.abaFicha = (params || {}).aba || 'geral';
+    S.anterior = S.rota === 'pessoa' ? S.anterior : { rota: S.rota, params: S.params };
+    S.rota = rota;
+    S.params = params || {};
+    fecharModal();
+    renderView();
+    window.scrollTo(0, 0);
+  }
+
+  function renderView() {
+    var seq = ++S.seq;
+    var el = $('#view');
+    if (!el) return;
+    atualizarNav();
+    el.innerHTML = carregandoHtml();
+    (VIEWS[S.rota] || VIEWS.painel)(el, seq).catch(function (e) {
+      if (seq !== S.seq) return;
+      el.innerHTML = vazio('alert', 'Não foi possível carregar', e.message,
+        '<button class="btn btn-secundario" style="margin-top:16px" data-acao="recarregar">Tentar novamente</button>');
+    });
+  }
+  function vivo(seq) { return seq === S.seq; }
+
+  function menuMais() {
+    abrirModal({
+      titulo: 'Mais opções',
+      corpo: '<div class="lista">' + [
+        ehAdm() ? ['equipe', 'Equipe e acessos', 'key'] : ['jornada', 'Jornada', 'route'], ehAdm() ? null : ['equipe', 'Equipe', 'users'], ['historico', 'Histórico', 'clock'], ['conta', 'Minha conta', 'user']
+      ].filter(Boolean).map(function (i) {
+        return '<div class="linha clicavel" data-acao="ir" data-rota="' + i[0] + '">' + ic(i[2]) + '<div class="info"><b>' + i[1] + '</b></div></div>';
+      }).join('') + '<div class="linha clicavel" data-acao="sair">' + ic('logout') + '<div class="info"><b>Sair</b></div></div></div>',
+      rodape: ''
+    });
+  }
+
+  /* =========================================================
+     TELA: PAINEL
+     ========================================================= */
+  function indicador(o) {
+    var acao = o.rota ? ' data-acao="ir" data-rota="' + o.rota + '"' + (o.filtro ? ' data-filtro="' + o.filtro + '"' : '') : '';
+    return '<div class="card indicador ' + (o.classe || '') + '"' + acao + '>' +
+      '<div class="topo-ind"><span>' + esc(o.rotulo) + '</span><span class="icone">' + ic(o.icone) + '</span></div>' +
+      '<div class="valor">' + esc(o.valor) + '</div>' + (o.nota ? '<div class="nota">' + esc(o.nota) + '</div>' : '') + '</div>';
+  }
+
+  VIEWS.painel = async function (el, seq) {
+    var d = await chamar('painel.ver');
+    if (!vivo(seq)) return;
+    el.innerHTML = d.tipo === 'LIDERANCA' ? painelLideranca(d) : painelConsolidador(d);
+    if (d.tipo === 'LIDERANCA') atualizarContador(d.indicadores.semResponsavel);
+  };
+
+  /** Atributos de uma linha que abre a ficha (ou linha simples, se o perfil não abre fichas). */
+  function abrir(id, pode) {
+    return pode ? ' clicavel" data-acao="abrir-pessoa" data-id="' + esc(id) + '"' : '"';
+  }
+
+  function painelLideranca(d) {
+    var i = d.indicadores;
+    var motivoCor = { 'Lembrete pendente': 'b-calor', 'Sem responsável': 'b-calor', 'Pediu apoio da liderança': 'b-marinho', 'Contato atrasado': 'b-perigo', 'Primeiro contato atrasado': 'b-perigo', 'Aguardando primeiro contato': 'b-azul' };
+    var maxEtapa = Math.max.apply(null, d.etapas.map(function (e) { return e.total; }).concat([1]));
+    return '' +
+      '<div class="cabecalho saudacao"><div><h1>' + saudacao() + ', ' + esc(primeiroNome(S.usuario.nome)) + '</h1>' +
+      '<p class="muted">' + esc(dataExtenso()) + ' · Veja como está o cuidado com cada pessoa.</p></div></div>' +
+      (d.pedidosSenha ? '<div class="lembrete apoio" style="cursor:pointer" data-acao="ir" data-rota="equipe">' + ic('key') + '<div><b>Pedidos de nova senha</b><p>' +
+        d.pedidosSenha + (d.pedidosSenha === 1 ? ' pessoa está' : ' pessoas estão') + ' aguardando a sua aprovação.</p></div><span class="btn btn-secundario btn-sm">Ver pedidos</span></div>' : '') +
+      '<div class="indicadores">' +
+      indicador({ rotulo: 'Em consolidação', valor: i.total, icone: 'heart', nota: i.consolidadores + ' consolidadores ativos', rota: 'pessoas', filtro: 'ativas' }) +
+      indicador({ rotulo: 'Com responsável', valor: i.comResponsavel, icone: 'check', classe: 'verde', nota: i.cobertura + '% de cobertura', rota: 'pessoas', filtro: 'em_acompanhamento' }) +
+      indicador({ rotulo: 'Sem responsável', valor: i.semResponsavel, icone: 'userPlus', classe: 'calor', nota: 'aguardando distribuição', rota: 'pessoas', filtro: 'sem_responsavel' }) +
+      indicador({ rotulo: 'Contatos atrasados', valor: i.atrasados, icone: 'clock', classe: 'perigo', nota: 'precisam de atenção', rota: 'agenda' }) +
+      '</div>' +
+      '<div class="grade grade-2">' +
+      '<div class="card"><div class="card-topo"><h3>' + ic('alert') + ' Precisam de atenção</h3>' +
+      (d.totalAtencao ? '<button class="btn btn-fantasma btn-sm" data-acao="ir" data-rota="pessoas" data-filtro="atencao">Ver todas (' + d.totalAtencao + ')</button>' : '') + '</div>' +
+      '<div class="lista" style="margin-top:10px">' + (d.atencao.length ? d.atencao.map(function (a) {
+        return '<div class="linha' + abrir(a.id, d.acoes.abrirFichas) + '>' + avatar(a.nome, '', a.foto) +
+          '<div class="info"><b>' + esc(a.nome) + '</b><small>' + (a.responsavel ? 'Com ' + esc(a.responsavel) : 'Ainda sem responsável') + (a.data ? ' · ' + esc(relativo(a.data)) : '') + '</small></div>' +
+          '<div class="lado">' + (a.status === 'SEM_RESPONSAVEL' && d.acoes.atribuir
+            ? '<button class="btn btn-secundario btn-sm" data-acao="atribuir" data-id="' + esc(a.id) + '" data-nome="' + esc(a.nome) + '">' + ic('userPlus') + ' Atribuir</button>'
+            : '<span class="badge ' + (motivoCor[a.motivo] || 'b-neutro') + '">' + esc(a.motivo) + '</span>') + '</div></div>';
+      }).join('') : vazio('heart', 'Tudo em dia', 'Ninguém está sem acompanhamento neste momento.')) + '</div></div>' +
+      '<div class="grade">' +
+      '<div class="card card-corpo"><h3>Cobertura do cuidado</h3><p class="muted small" style="margin:2px 0 16px">' + i.cobertura + '% das pessoas já têm um responsável. Situação de cada uma:</p><div class="cobertura">' +
+      '<div class="anel" style="--p:' + i.cobertura + '" data-texto="' + i.cobertura + '%"></div><div class="legenda">' +
+      '<div><i style="background:var(--verde)"></i>' + pessoasTxt(i.emDia) + ' em dia</div>' +
+      '<div><i style="background:var(--azul)"></i>' + pessoasTxt(i.primeiroContato) + ' aguardando o 1º contato</div>' +
+      '<div><i style="background:var(--perigo)"></i>' + pessoasTxt(i.atrasados) + ' com contato atrasado</div>' +
+      '<div><i style="background:var(--calor)"></i>' + pessoasTxt(i.semResponsavel) + ' sem responsável</div></div></div></div>' +
+      '<div class="card"><div class="card-topo"><h3>' + ic('users') + ' Mapa de cuidado</h3><button class="btn btn-fantasma btn-sm" data-acao="ir" data-rota="equipe">Equipe</button></div>' +
+      '<div style="margin-top:8px">' + (d.equipe.length ? d.equipe.map(function (c) {
+        var pct = Math.round(c.carga / c.capacidade * 100);
+        return '<div class="equipe-linha">' + avatar(c.nome, '', c.foto) + '<div class="info" style="min-width:0"><b style="font-weight:600">' + esc(c.nome) + '</b>' +
+          '<div class="cuida-de">' + (c.pessoas.length ? '<span class="pilha">' + c.pessoas.slice(0, 5).map(function (x) {
+            return '<span title="' + esc(x.nome) + '"' + (d.acoes.abrirFichas ? ' data-acao="abrir-pessoa" data-id="' + esc(x.id) + '"' : '') + '>' + avatar(x.nome, 'mini', x.foto) + '</span>';
+          }).join('') + (c.pessoas.length > 5 ? '<span class="mais">+' + (c.pessoas.length - 5) + '</span>' : '') + '</span>' : '') +
+          '<small class="muted">' + (c.atrasados ? '<span style="color:var(--perigo)">' + c.atrasados + ' atrasado(s)</span>' : 'tudo em dia') + '</small></div></div>' +
+          '<div><div class="carga">' + c.carga + ' de ' + c.capacidade + '</div><div class="barra ' + (pct > 100 ? 'excedida' : pct >= 100 ? 'cheia' : '') + '"><i style="width:' + Math.min(100, pct) + '%"></i></div></div></div>';
+      }).join('') : vazio('users', 'Nenhum consolidador', 'Cadastre a equipe para distribuir as pessoas.')) + '</div></div>' +
+      '</div></div>' +
+      '<div class="card card-corpo" style="margin-top:18px"><h3 style="margin-bottom:4px">' + ic('route') + ' Jornada de consolidação</h3>' +
+      '<p class="muted small" style="margin-bottom:16px">Quantas pessoas estão em cada momento da caminhada.</p>' +
+      '<div class="etapas jornada-grafico">' + d.etapas.map(function (e, idx) {
+        return '<div style="display:flex;flex-direction:column;gap:8px"><div class="barra" style="height:56px;border-radius:10px;display:flex;align-items:flex-end;background:var(--azul-claro)">' +
+          '<i style="width:100%;height:' + Math.max(6, Math.round(e.total / maxEtapa * 100)) + '%;border-radius:10px;opacity:' + Math.min(1, 0.4 + idx * 0.08) + '"></i></div>' +
+          '<div><b style="font-size:20px;color:var(--marinho)">' + e.total + '</b><div class="small muted">' + esc(e.nome) + '</div></div></div>';
+      }).join('') + '</div></div>';
+  }
+
+  function painelConsolidador(d) {
+    var i = d.indicadores;
+    return '' +
+      '<div class="cabecalho saudacao"><div><h1>' + saudacao() + ', ' + esc(primeiroNome(S.usuario.nome)) + '</h1>' +
+      '<p class="muted">' + (i.total ? 'Você está cuidando de ' + i.total + (i.total === 1 ? ' pessoa' : ' pessoas') + '. Obrigado por estar perto de cada uma delas.' : 'Assim que a liderança direcionar alguém a você, a pessoa aparecerá aqui.') + '</p></div></div>' +
+      '<div class="indicadores tres">' +
+      indicador({ rotulo: 'Sob meus cuidados', valor: i.total, icone: 'heart', nota: 'capacidade: ' + i.capacidade + ' pessoas' }) +
+      indicador({ rotulo: 'Precisam de contato', valor: i.precisamContato, icone: 'message', classe: i.precisamContato ? 'calor' : 'verde', nota: i.precisamContato ? 'priorize estas pessoas' : 'tudo em dia' }) +
+      indicador({ rotulo: 'Próximos 7 dias', valor: i.proximos7, icone: 'calendar', nota: 'contatos agendados', rota: 'agenda' }) +
+      '</div>' +
+      '<div class="card"><div class="card-topo"><h3>Pessoas sob meu cuidado</h3></div><div class="lista" style="margin-top:10px">' +
+      (d.pessoas.length ? d.pessoas.map(function (p) {
+        var sub = p.ultimoContato ? 'Último contato: ' + dataCurta(p.ultimoContato) + (p.proximaAcao ? ' · ' + p.proximaAcao : '') : 'Primeiro contato pendente';
+        return '<div class="linha clicavel" data-acao="abrir-pessoa" data-id="' + esc(p.id) + '">' + avatar(p.nome, '', p.foto) +
+          '<div class="info"><b>' + esc(p.nome) + '</b><small>' + esc(sub) + '</small></div>' +
+          '<div class="lado">' + (p.proximoContato ? '<span class="small muted" style="text-align:right">' + (p.status === 'ATRASADO' ? 'era ' : 'próximo ') + esc(relativo(p.proximoContato)) + '</span>' : '') + badgeStatus(p.status) + '</div></div>';
+      }).join('') : vazio('heart', 'Nenhuma pessoa ainda', 'Quando alguém for direcionado a você, aparecerá aqui.')) + '</div></div>';
+  }
+
+  /* =========================================================
+     TELA: CONSOLIDAÇÃO (lista de pessoas)
+     ========================================================= */
+  VIEWS.pessoas = async function (el, seq) {
+    var lid = veGeral();
+    var filtros = lid
+      ? [['ativas', 'Todas'], ['sem_responsavel', 'Sem responsável'], ['em_acompanhamento', 'Em acompanhamento'], ['atencao', 'Precisam de atenção'], ['arquivadas', 'Arquivadas']]
+      : [['minhas', 'Sob meus cuidados'], ['todas', 'Todas as pessoas']];
+    var filtro = S.params.filtro || filtros[0][0];
+    var d = await chamar('pessoas.listar', { filtro: filtro });
+    if (!vivo(seq)) return;
+    if (lid) atualizarContador(d.contagens.sem_responsavel);
+
+    el.innerHTML =
+      '<div class="cabecalho"><div><h1>Pessoas</h1><p class="muted">' +
+      (ehAdm() ? 'Visão geral de todas as pessoas e de quem está cuidando de cada uma.' : lid ? 'Todas as pessoas que aceitaram Jesus e quem está cuidando de cada uma.' : 'Você vê os detalhes apenas das pessoas sob seus cuidados.') + '</p></div>' +
+      '</div>' +
+      '<div class="barra-ferramentas"><div class="chips">' + filtros.map(function (f) {
+        return '<button class="chip ' + (f[0] === d.filtro ? 'ativo' : '') + '" data-acao="ir" data-rota="pessoas" data-filtro="' + f[0] + '">' + f[1] + ' <span class="n">' + (d.contagens[f[0]] || 0) + '</span></button>';
+      }).join('') + '</div>' +
+      '<div class="busca">' + ic('search') + '<input class="input" id="busca" placeholder="Buscar por nome ou responsável" value="' + esc(S.params.busca || '') + '"></div></div>' +
+      '<div class="card tabela-pessoas"><div class="lista" id="lista-pessoas"></div></div>';
+
+    var desenhar = function () {
+      var termo = norm($('#busca').value);
+      var itens = d.itens.filter(function (i) { return !termo || norm(i.nome).indexOf(termo) >= 0 || (i.responsavel && norm(i.responsavel.nome).indexOf(termo) >= 0); });
+      $('#lista-pessoas').innerHTML = itens.length
+        ? '<div class="linha cabeca"><div>Pessoa</div><div>Responsável</div><div>Situação</div><div>Último contato</div><div></div></div>' + itens.map(linhaPessoa).join('')
+        : vazio('search', 'Ninguém por aqui', termo ? 'Nenhum resultado para esta busca.' : 'Não há pessoas neste filtro.');
+    };
+    $('#busca').addEventListener('input', function () { S.params.busca = this.value; desenhar(); });
+    desenhar();
+  };
+
+  function norm(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+
+  function linhaPessoa(i) {
+    var lid = ehLid();
+    if (!i.podeAbrir && i.etapa) { // visão geral (ADM): situação sem abrir a ficha
+      return '<div class="linha"><div class="pessoa-cel">' + avatar(i.nome) + '<div class="info"><b>' + esc(i.nome) + '</b><small>' + esc(nomeDe(CFG.etapas, i.etapa)) + '</small></div></div>' +
+        '<div class="col-resp resp-cel">' + (i.responsavel ? avatar(i.responsavel.nome, 'p', i.responsavel.foto) + '<span>' + esc(i.responsavel.nome) + '</span>' : '<span class="muted">Sem responsável</span>') + '</div>' +
+        '<div class="col-status">' + badgeStatus(i.status) + '</div><div class="col-ultimo small muted">' + (i.ultimoContato ? esc(relativo(i.ultimoContato)) : '—') + '</div><div class="col-acoes"></div></div>';
+    }
+    if (!i.podeAbrir) {
+      return '<div class="linha"><div class="pessoa-cel">' + avatar(i.nome) + '<div class="info"><b>' + esc(i.nome) + '</b><small>' + ic('lock', 'style="width:12px;height:12px;vertical-align:-1px"') + ' Detalhes visíveis só ao responsável</small></div></div>' +
+        '<div class="col-resp resp-cel">' + (i.responsavel ? avatar(i.responsavel.nome, 'p', i.responsavel.foto) + '<span>' + esc(i.responsavel.nome) + '</span>' : '<span class="muted">—</span>') + '</div>' +
+        '<div class="col-status">' + badgeStatus(i.status) + '</div><div class="col-ultimo"></div><div class="col-acoes"></div></div>';
+    }
+    var ativa = i.situacao === 'ATIVA';
+    var resp = i.responsavel
+      ? avatar(i.responsavel.nome, 'p', i.responsavel.foto) + '<span>' + esc(i.responsavel.nome) + (i.minha && !lid ? ' (você)' : '') + '</span>'
+      : (lid && ativa ? '<button class="btn btn-secundario btn-sm" data-acao="atribuir" data-id="' + esc(i.id) + '" data-nome="' + esc(i.nome) + '">' + ic('userPlus') + ' Atribuir</button>' : '<span class="muted">Sem responsável</span>');
+    return '<div class="linha clicavel" data-acao="abrir-pessoa" data-id="' + esc(i.id) + '">' +
+      '<div class="pessoa-cel">' + avatar(i.nome, '', i.foto) + '<div class="info"><b>' + esc(i.nome) + '</b><small>' + esc(nomeDe(CFG.etapas, i.etapa)) + '</small></div></div>' +
+      '<div class="col-resp resp-cel">' + resp + '</div>' +
+      '<div class="col-status">' + badgeStatus(i.status) + '</div>' +
+      '<div class="col-ultimo small muted">' + (i.ultimoContato ? esc(relativo(i.ultimoContato)) : '—') + '</div>' +
+      '<div class="col-acoes">' + (lid && ativa && i.responsavel ? '<button class="btn btn-fantasma btn-icone" title="Transferir responsável" data-acao="atribuir" data-id="' + esc(i.id) + '" data-nome="' + esc(i.nome) + '" data-atual="' + esc(i.responsavel.id) + '">' + ic('swap') + '</button>' : '') + '</div>' +
+      '</div>';
+  }
+
+  /* =========================================================
+     TELA: FICHA DA PESSOA
+     ========================================================= */
+  VIEWS.pessoa = async function (el, seq) {
+    var d = await chamar('pessoas.obter', { id: S.params.id });
+    if (!vivo(seq)) return;
+    S.ficha = d;
+    var p = d.pessoa, perm = d.permissoes;
+    var abas = [['geral', 'Visão geral', 'user'], ['historico', 'Histórico (' + d.registros.length + ')', 'message'], ['caminhada', 'Caminhada', 'route'], ['cuidado', 'Oração e cuidado', 'lock']];
+    if (ehLid()) abas.push(['responsaveis', 'Responsáveis', 'swap']);
+    if (!abas.some(function (a) { return a[0] === S.abaFicha; })) S.abaFicha = 'geral';
+
+    el.innerHTML =
+      '<button class="voltar" data-acao="voltar">' + ic('left') + ' Voltar</button>' +
+      (p.situacao === 'ARQUIVADA' ? '<p class="restrito" style="margin-bottom:12px">' + ic('archive') + ' Cadastro arquivado: ' + esc(p.motivoArquivamento) + '</p>' : '') +
+      (d.resumo.encaminhada ? faixaEncaminhamento(d) : '') +
+      (p.pendencia ? '<div class="lembrete">' + ic('flag') + '<div><b>Lembrete</b><p>' + esc(p.pendencia) + '</p></div>' +
+        '<button class="btn btn-secundario btn-sm" data-acao="resolver-lembrete">' + ic('check') + ' Marcar como feito</button></div>' : '') +
+      '<div class="card"><div class="ficha-topo">' + fotoEditavel(p.nome, p.foto, p.id) +
+      '<div class="dados"><h1>' + esc(p.nome) + '</h1><div class="meta">' + badgeEtapa(p.etapa) + badgeStatus(d.resumo.status) +
+      '<span>' + (d.responsavel ? avatar(d.responsavel.nome, 'p', d.responsavel.foto) + 'Cuidado por <b style="color:var(--texto)">' + esc(d.responsavel.nome) + '</b>' : ic('heart') + 'Sem responsável') + '</span>' +
+      (p.telefone ? '<span>' + ic('phone') + '<a href="' + esc(linkWhats(p.telefone)) + '" target="_blank" rel="noopener">' + esc(p.telefone) + '</a></span>' : '') +
+      '</div></div>' +
+      '<div class="ficha-acoes">' +
+      (perm.registrar ? '<button class="btn btn-primario" data-acao="registrar">' + ic('plus') + ' Registrar acompanhamento</button>' : '') +
+      (perm.gerenciar && p.situacao === 'ATIVA' ? '<button class="btn btn-secundario" data-acao="atribuir" data-id="' + esc(p.id) + '" data-nome="' + esc(p.nome) + '" data-atual="' + esc(d.responsavel ? d.responsavel.id : '') + '">' + ic(d.responsavel ? 'swap' : 'userPlus') + (d.responsavel ? ' Transferir' : ' Atribuir') + '</button>' : '') +
+      '</div></div></div>' +
+      '<div class="abas">' + abas.map(function (a) {
+        return '<button class="aba ' + (a[0] === S.abaFicha ? 'ativa' : '') + '" data-acao="aba" data-aba="' + a[0] + '">' + ic(a[2], 'style="width:16px;height:16px"') + a[1] + '</button>';
+      }).join('') + '</div><div id="aba-conteudo"></div>';
+    desenharAba();
+  };
+
+  function desenharAba() {
+    var d = S.ficha, alvo = $('#aba-conteudo');
+    if (!d || !alvo) return;
+    document.querySelectorAll('.aba').forEach(function (b) { b.classList.toggle('ativa', b.dataset.aba === S.abaFicha); });
+    alvo.innerHTML = ({ geral: abaGeral, historico: abaHistorico, caminhada: abaCaminhada, cuidado: abaCuidado, responsaveis: abaResponsaveis }[S.abaFicha] || abaGeral)(d);
+    if (S.abaFicha === 'caminhada') {
+      $('#form-caminhada').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var f = lerForm(this), btn = this.querySelector('[type=submit]');
+        carregandoBtn(btn, true);
+        try {
+          var r = await chamar('pessoas.atualizar', { id: d.pessoa.id, etapa: f.etapa, desenvolvimento: f.desenvolvimento || {} });
+          toast('Caminhada atualizada.');
+          renderView();
+          mostrarLembrete(r && r.lembrete, d.pessoa.nome);
+        } catch (err) { carregandoBtn(btn, false); toast(err.message, 'erro'); }
+      });
+    }
+  }
+
+  function faixaEncaminhamento(d) {
+    var r = d.registros.filter(function (x) { return x.encaminhada && !x.atendida; })[0];
+    if (!r) return '';
+    return '<div class="lembrete apoio">' + ic('flag') + '<div><b>Pediu apoio da liderança</b><p>' + esc(r.autor) + ' sinalizou em ' + esc(dataBR(r.data)) +
+      ' que esta situação precisa de um cuidado especial: “' + esc(r.assunto) + '”. Veja os detalhes no histórico.</p></div>' +
+      (d.permissoes.atender ? '<button class="btn btn-secundario btn-sm" data-acao="atender-encaminhamento">' + ic('check') + ' Marcar como atendido</button>' : '') + '</div>';
+  }
+
+  function item(rotulo, valor, classe) {
+    return '<div class="' + (classe || '') + '"><small>' + rotulo + '</small><p>' + (valor ? valor : '<span class="muted">—</span>') + '</p></div>';
+  }
+
+  function abaGeral(d) {
+    var p = d.pessoa, r = d.resumo, perm = d.permissoes;
+    var prox = r.proximoContato;
+    var proximo = prox
+      ? '<div class="proximo">' + '<div class="data-bloco"><b>' + prox.slice(8, 10) + '</b><small>' + MESES[Number(prox.slice(5, 7)) - 1] + '</small></div>' +
+        '<div><b>' + esc(r.proximaAcao || 'Próximo contato') + '</b><p class="small ' + (r.status === 'ATRASADO' ? '' : 'muted') + '" style="' + (r.status === 'ATRASADO' ? 'color:var(--perigo);font-weight:600' : '') + '">' +
+        (r.status === 'ATRASADO' ? 'Atrasado — previsto para ' : 'Previsto para ') + esc(relativo(prox)) + '</p></div></div>'
+      : '<p class="muted">Nenhum próximo contato definido.</p>';
+    var admin = '';
+    if (perm.editarCadastro) {
+      admin = '<div class="card card-corpo"><h3 style="margin-bottom:12px">Administração</h3><div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">' +
+        '<button class="btn btn-fantasma btn-sm" data-acao="editar-pessoa">' + ic('edit') + ' Editar cadastro</button>' +
+        (d.responsavel && p.situacao === 'ATIVA' ? '<button class="btn btn-fantasma btn-sm" data-acao="remover-resp">' + ic('x') + ' Remover responsável</button>' : '') +
+        (perm.arquivar ? (p.situacao === 'ATIVA'
+          ? '<button class="btn btn-fantasma btn-sm" style="color:var(--perigo)" data-acao="arquivar">' + ic('archive') + ' Arquivar cadastro</button>'
+          : '<button class="btn btn-fantasma btn-sm" data-acao="reativar">' + ic('check') + ' Reativar cadastro</button>') : '') +
+        '</div></div>';
+    }
+    return '<div class="grade grade-2">' +
+      '<div class="card card-corpo"><h3 style="margin-bottom:16px">Informações pessoais</h3><div class="dl">' +
+      item('Telefone / WhatsApp', p.telefone ? '<a href="' + esc(linkWhats(p.telefone)) + '" target="_blank" rel="noopener">' + esc(p.telefone) + '</a>' : '') +
+      item('Aceitou Jesus em', esc(p.dataDecisao ? dataBR(p.dataDecisao) : '')) +
+      item('Onde aconteceu', esc(nomeDe(CFG.locais, p.localDecisao))) +
+      item('Primeiro contato feito por', esc(p.primeiroContatoPor)) +
+      item('Cadastrado em', esc(dataBR(p.criadoEm)) + (p.criadoPor ? ' <span class="muted">por ' + esc(p.criadoPor) + '</span>' : '')) +
+      item('Endereço', esc(p.endereco), 'inteiro') +
+      item('Observações iniciais', esc(p.observacoes), 'inteiro') +
+      '</div></div>' +
+      '<div class="grade" style="align-content:start">' +
+      '<div class="card card-corpo"><h3 style="margin-bottom:14px">Próximos passos</h3>' + proximo +
+      (r.ultimoContato ? '<p class="small muted" style="margin-top:12px">Último contato ' + esc(relativo(r.ultimoContato)) + ' · ' + r.totalRegistros + ' registro(s)</p>' : '') + '</div>' +
+      admin + '</div></div>';
+  }
+
+  var ICONE_TIPO = { PRESENCIAL: 'users', TELEFONE: 'phone', WHATSAPP: 'message', OUTRO: 'clock' };
+  function blocoTexto(rotulo, texto, sensivel) {
+    if (!texto) return '';
+    return '<div class="bloco-texto ' + (sensivel ? 'sensivel' : '') + '"><small>' + (sensivel ? ic('lock', 'style="width:11px;height:11px;vertical-align:-1px"') + ' ' : '') + esc(rotulo) + '</small><p>' + esc(texto) + '</p></div>';
+  }
+
+  function abaHistorico(d) {
+    if (!d.registros.length) {
+      return '<div class="card">' + vazio('message', 'Nenhum acompanhamento registrado', 'Registre o primeiro contato para começar o histórico.',
+        d.permissoes.registrar ? '<button class="btn btn-primario" style="margin-top:16px" data-acao="registrar">' + ic('plus') + ' Registrar acompanhamento</button>' : '') + '</div>';
+    }
+    return '<div class="timeline">' + d.registros.map(function (r) {
+      return '<div class="evento"><div class="marcador"></div><div class="card card-corpo">' +
+        '<div class="evento-topo"><div class="quando">' + ic(ICONE_TIPO[r.tipo] || 'clock', 'style="width:15px;height:15px"') + esc(dataBR(r.data)) + ' · ' + esc(nomeDe(CFG.tiposContato, r.tipo)) + '</div>' +
+        (r.encaminhada ? '<span class="badge ' + (r.atendida ? 'b-verde' : 'b-marinho') + '">' + ic('flag', 'style="width:12px;height:12px"') + (r.atendida ? ' Apoio da liderança: atendido' : ' Pediu apoio da liderança') + '</span>' : '') + '</div>' +
+        '<h4>' + esc(r.assunto) + '</h4>' +
+        (r.estudo ? '<span class="badge b-azul sem-ponto">' + ic('book', 'style="width:13px;height:13px"') + ' ' + esc(r.estudo) + '</span>' : '') +
+        blocoTexto('O que foi compartilhado', r.ensinado) +
+        blocoTexto('Dúvidas apresentadas', r.duvidas) +
+        blocoTexto('Dificuldades', r.dificuldades, true) +
+        blocoTexto('Pedidos de oração', r.pedidosOracao, true) +
+        blocoTexto('Próxima ação', (r.proximaAcao || '') + (r.proximoContato ? (r.proximaAcao ? ' — ' : '') + 'próximo contato em ' + dataBR(r.proximoContato) : '')) +
+        '<p class="small muted" style="margin-top:12px">Registrado por ' + esc(r.autor) + (r.registradoPorOutro ? ' · responsável na época: ' + esc(r.consolidador) : '') + '</p>' +
+        '</div></div>';
+    }).join('') + '</div>';
+  }
+
+  function abaCaminhada(d) {
+    var p = d.pessoa;
+    return '<form class="card card-corpo" id="form-caminhada"><h3>Etapa atual</h3>' +
+      '<p class="muted small" style="margin:4px 0 16px">As etapas não são uma escada obrigatória: alguém pode estar integrado à igreja e ainda precisar de acompanhamento.</p>' +
+      '<div class="etapas">' + etapasAtivas().map(function (e, i) {
+        return '<label class="etapa-opcao"><input type="radio" name="etapa" value="' + esc(e.id) + '"' + (e.id === p.etapa ? ' checked' : '') + '><span><i>' + (i + 1) + '</i>' + esc(e.nome) + (e.lembrete ? '<small class="tem-lembrete">' + ic('flag', 'style="width:11px;height:11px"') + ' lembrete</small>' : '') + '</span></label>';
+      }).join('') + '</div>' +
+      '<h3 style="margin:26px 0 4px">Desenvolvimento espiritual</h3><p class="muted small" style="margin-bottom:14px">Marque o que já faz parte da caminhada desta pessoa.</p>' +
+      '<div class="marcos">' + CFG.desenvolvimento.map(function (m) {
+        return '<label class="check"><input type="checkbox" data-grupo="desenvolvimento" name="' + m.id + '"' + (p.desenvolvimento[m.id] ? ' checked' : '') + '><span>' + esc(m.nome) + '</span></label>';
+      }).join('') + '</div>' +
+      '<div style="display:flex;justify-content:flex-end;margin-top:20px"><button type="submit" class="btn btn-primario">' + ic('check') + ' Salvar caminhada</button></div></form>';
+  }
+
+  function abaCuidado(d) {
+    var itens = d.registros.filter(function (r) { return r.dificuldades || r.pedidosOracao; });
+    return '<p class="restrito" style="margin-bottom:14px">' + ic('lock') + ' Informações confidenciais — visíveis apenas para o responsável atual e para a liderança.</p>' +
+      (itens.length ? '<div class="grade">' + itens.map(function (r) {
+        return '<div class="card card-corpo"><div class="evento-topo"><div class="quando">' + esc(dataBR(r.data)) + ' · ' + esc(r.assunto) + '</div></div>' +
+          blocoTexto('Dificuldades', r.dificuldades, true) + blocoTexto('Pedidos de oração', r.pedidosOracao, true) + '</div>';
+      }).join('') + '</div>' : '<div class="card">' + vazio('hand', 'Nenhum pedido registrado', 'Pedidos de oração e dificuldades registrados nos acompanhamentos aparecerão aqui.') + '</div>');
+  }
+
+  function abaResponsaveis(d) {
+    if (!d.atribuicoes.length) return '<div class="card">' + vazio('users', 'Ainda sem responsável', 'O histórico de responsáveis aparecerá aqui.') + '</div>';
+    return '<div class="timeline">' + d.atribuicoes.map(function (a) {
+      return '<div class="evento"><div class="marcador"></div><div class="card card-corpo"><div class="evento-topo"><b>' + esc(a.consolidador) + '</b>' +
+        (a.ativa ? '<span class="badge b-verde">Responsável atual</span>' : '<span class="badge b-neutro">Encerrado</span>') + '</div>' +
+        '<p class="small muted">De ' + esc(dataBR(a.inicio)) + (a.fim ? ' até ' + esc(dataBR(a.fim)) : ' até hoje') + ' · atribuído por ' + esc(a.por) + '</p>' +
+        blocoTexto('Motivo da atribuição', a.motivo) + blocoTexto('Encerramento', a.motivoEncerramento ? a.motivoEncerramento + (a.encerradoPor ? ' (' + a.encerradoPor + ')' : '') : '') +
+        '</div></div>';
+    }).join('') + '</div>';
+  }
+
+  /* ---------- Modais da consolidação ---------- */
+  function formPessoa(p, criar) {
+    p = p || {};
+    return '<div class="form-grade">' +
+      campo('Nome completo *', input('nome', p.nome, 'autocomplete="off" maxlength="120"'), '', 'inteiro') +
+      campo('Telefone / WhatsApp', input('telefone', p.telefone, 'inputmode="tel" placeholder="(11) 90000-0000"')) +
+      campo('Aceitou Jesus em *', input('dataDecisao', p.dataDecisao || hojeISO(), 'type="date"')) +
+      campo('Onde aconteceu', segmentos('localDecisao', CFG.locais, p.localDecisao || 'CULTO'), '', 'inteiro') +
+      campo('Endereço onde mora', input('endereco', p.endereco, 'maxlength="250" placeholder="Rua, número — bairro"'), '', 'inteiro') +
+      campo('Quem fez o primeiro contato', input('primeiroContatoPor', p.primeiroContatoPor), '', 'inteiro') +
+      campo('Observações iniciais', textarea('observacoes', p.observacoes, 'maxlength="1000"'), '', 'inteiro') +
+      (criar ? '<div class="inteiro" id="atribuir-agora"></div>' +
+        '<label class="check destaque inteiro"><input type="checkbox" name="consentimento"><span><b>A pessoa autorizou o registro dos seus dados</b><br><span class="small muted">Para que a igreja possa acompanhá-la. Os dados ficam restritos à liderança e ao responsável (LGPD).</span></span></label>' : '') +
+      '</div>';
+  }
+
+  async function modalNovaPessoa() {
+    abrirModal({
+      titulo: 'Cadastrar pessoa', subtitulo: 'Alguém que aceitou Jesus e precisa de acompanhamento.', largo: true, botao: 'Cadastrar',
+      corpo: formPessoa(null, true),
+      aoAbrir: async function () {
+        try {
+          var equipe = (await chamar('equipe.listar')).filter(function (u) { return u.ativo; });
+          var alvo = $('#atribuir-agora');
+          if (!alvo) return;
+          alvo.innerHTML = campo('Atribuir a um consolidador agora (opcional)',
+            '<select class="input" name="idConsolidador"><option value="">Deixar para depois</option>' + equipe.map(function (u) {
+              return '<option value="' + esc(u.id) + '">' + esc(u.nome) + ' — ' + u.carga + ' de ' + u.capacidade + (u.carga >= u.capacidade ? ' (completo)' : '') + '</option>';
+            }).join('') + '</select>');
+        } catch (e) {}
+      },
+      enviar: async function (d) {
+        var r = await chamarComConfirmacao('pessoas.criar', d);
+        toast('Pessoa cadastrada com carinho!');
+        ir('pessoa', { id: r.id });
+      }
+    });
+  }
+
+  function modalEditarPessoa() {
+    var p = S.ficha.pessoa;
+    abrirModal({
+      titulo: 'Editar cadastro', subtitulo: p.nome, largo: true, corpo: formPessoa(p, false),
+      enviar: async function (d) {
+        await chamar('pessoas.atualizar', { id: p.id, cadastro: d });
+        toast('Cadastro atualizado.');
+        renderView();
+      }
+    });
+  }
+
+  async function modalAtribuir(idPessoa, nome, atual) {
+    var form = abrirModal({
+      titulo: atual ? 'Transferir responsável' : 'Atribuir responsável', subtitulo: nome,
+      botao: atual ? 'Transferir' : 'Atribuir',
+      corpo: '<div id="opcoes-equipe">' + carregandoHtml() + '</div>' +
+        campo(atual ? 'Motivo da transferência *' : 'Observação (opcional)', textarea('motivo', '', 'maxlength="300" placeholder="' + (atual ? 'Ex.: proximidade de bairro, disponibilidade…' : 'Ex.: mesma célula, afinidade…') + '"'),
+          atual ? 'O histórico de acompanhamento é preservado e passa a ser visto pelo novo responsável.' : '') +
+        campo('Prazo para o primeiro contato', input('prazo', somarDias(hojeISO(), 3), 'type="date"')),
+      enviar: async function (d) {
+        if (!d.idConsolidador) throw new Error('Escolha quem vai acompanhar esta pessoa.');
+        d.idPessoa = idPessoa;
+        await chamarComConfirmacao('atribuicoes.atribuir', d);
+        toast(atual ? 'Responsável transferido.' : 'Responsável atribuído.');
+        fecharModal();
+        renderView();
+      }
+    });
+    try {
+      var equipe = (await chamar('equipe.listar')).filter(function (u) { return u.ativo; });
+      var alvo = form.querySelector('#opcoes-equipe');
+      if (!alvo) return;
+      alvo.innerHTML = '<div class="rotulo" style="margin-bottom:8px">Quem vai acompanhar? *</div><div class="lista card" style="margin-bottom:16px;box-shadow:none">' +
+        (equipe.length ? equipe.map(function (u) {
+          var pct = Math.round(u.carga / u.capacidade * 100);
+          var eAtual = u.id === atual;
+          return '<label class="linha ' + (eAtual ? '' : 'clicavel') + '" style="cursor:' + (eAtual ? 'default' : 'pointer') + '">' +
+            '<input type="radio" name="idConsolidador" value="' + esc(u.id) + '"' + (eAtual ? ' disabled' : '') + ' style="accent-color:var(--azul)">' + avatar(u.nome, '', u.foto) +
+            '<div class="info"><b>' + esc(u.nome) + (eAtual ? ' <span class="badge b-verde">atual</span>' : '') + '</b><small>' + esc(nomeDe(CFG.perfis, u.perfil)) + '</small></div>' +
+            '<div style="width:110px"><div class="small muted" style="text-align:right;margin-bottom:4px">' + u.carga + ' de ' + u.capacidade + '</div><div class="barra ' + (pct >= 100 ? 'cheia' : '') + '"><i style="width:' + Math.min(100, pct) + '%"></i></div></div></label>';
+        }).join('') : vazio('users', 'Nenhum integrante ativo', 'Cadastre a equipe primeiro.')) + '</div>';
+    } catch (e) { toast(e.message, 'erro'); }
+  }
+
+  async function modalRegistro() {
+    var d = S.ficha, p = d.pessoa;
+    if (!S.estudos) { try { S.estudos = await chamar('estudos.listar'); } catch (e) { S.estudos = []; } }
+    abrirModal({
+      titulo: 'Registrar acompanhamento', subtitulo: p.nome, largo: true, botao: 'Salvar registro',
+      corpo: '<div class="form-grade">' +
+        campo('Data do contato *', input('data', hojeISO(), 'type="date" max="' + hojeISO() + '"')) +
+        campo('Tipo de contato', segmentos('tipo', CFG.tiposContato, 'WHATSAPP')) +
+        campo('Assunto conversado *', input('assunto', '', 'maxlength="200" placeholder="Ex.: Conversamos sobre oração"'), '', 'inteiro') +
+        campo('Estudo trabalhado', select('idEstudo', S.estudos.map(function (e) { return { id: e.id, nome: e.titulo }; }), '', 'Nenhum')) +
+        campo('Atualizar etapa', select('novaEtapa', etapasAtivas().filter(function (e) { return e.id !== p.etapa; }), '', 'Manter: ' + nomeDe(CFG.etapas, p.etapa))) +
+        campo('O que foi compartilhado / ensinado', textarea('ensinado', ''), '', 'inteiro') +
+        campo('Dúvidas apresentadas', textarea('duvidas', ''), '', 'inteiro') +
+        '<div class="secao-form">' + ic('lock', 'style="width:14px;height:14px"') + ' Informações confidenciais</div>' +
+        campo('Dificuldades identificadas', textarea('dificuldades', ''), '', 'inteiro') +
+        campo('Pedidos de oração', textarea('pedidosOracao', ''), 'Visível apenas para o responsável e a liderança.', 'inteiro') +
+        '<div class="secao-form">' + ic('route', 'style="width:14px;height:14px"') + ' Próximos passos</div>' +
+        campo('Próxima ação', input('proximaAcao', '', 'maxlength="300" placeholder="Ex.: Convidar para a célula de quinta"')) +
+        campo('Data do próximo contato', input('proximoContato', somarDias(hojeISO(), 7), 'type="date" min="' + hojeISO() + '"')) +
+        '<label class="check inteiro"><input type="checkbox" name="encaminhar"><span><b>Pedir apoio da liderança</b><br><span class="small muted">Marque quando a situação precisar de um cuidado especial (aconselhamento pastoral, crise, visita). A liderança é avisada no painel.</span></span></label>' +
+        '</div>',
+      enviar: async function (f) {
+        f.idPessoa = p.id;
+        var r = await chamar('acompanhamentos.registrar', f);
+        toast('Acompanhamento registrado. Obrigado pelo cuidado!');
+        S.abaFicha = 'historico';
+        fecharModal();
+        renderView();
+        mostrarLembrete(r && r.lembrete, p.nome);
+      }
+    });
+  }
+
+  function modalMotivo(titulo, texto, botao, acao, extra, sucesso) {
+    abrirModal({
+      titulo: titulo, subtitulo: S.ficha.pessoa.nome, botao: botao,
+      corpo: '<p class="muted" style="margin-bottom:14px">' + esc(texto) + '</p>' + campo('Motivo *', textarea('motivo', '', 'maxlength="300"')),
+      enviar: async function (f) {
+        var dados = Object.assign({ motivo: f.motivo }, extra);
+        await chamar(acao, dados);
+        toast(sucesso);
+        fecharModal();
+        renderView();
+      }
+    });
+  }
+
+  /* =========================================================
+     TELA: AGENDA
+     ========================================================= */
+  VIEWS.agenda = async function (el, seq) {
+    var d = await chamar('agenda.ver');
+    if (!vivo(seq)) return;
+    var g = d.grupos;
+    var grupos = [
+      ['atrasados', 'Atrasados', 'alert', 'var(--perigo)'],
+      ['hoje', 'Hoje', 'clock', 'var(--azul)'],
+      ['semana', 'Próximos 7 dias', 'calendar', 'var(--marinho)'],
+      ['depois', 'Mais adiante', 'calendar', 'var(--texto-2)'],
+      ['semData', 'Sem próximo contato definido', 'message', 'var(--calor-texto)']
+    ];
+    var total = grupos.reduce(function (s, x) { return s + g[x[0]].length; }, 0);
+    el.innerHTML = '<div class="cabecalho"><div><h1>Agenda de contatos</h1><p class="muted">' +
+      (d.mostrarResponsavel ? 'Próximos contatos de toda a equipe.' : 'Seus próximos contatos e encontros.') + '</p></div></div>' +
+      (total ? grupos.filter(function (x) { return g[x[0]].length; }).map(function (x) {
+        return '<div class="grupo-agenda"><h3 style="color:' + x[3] + '">' + ic(x[2]) + x[1] + ' <span class="badge b-neutro sem-ponto">' + g[x[0]].length + '</span></h3><div class="card lista">' +
+          g[x[0]].map(function (i) {
+            return '<div class="linha' + abrir(i.id, d.abrirFichas) + '>' + pilulaData(i.data, x[0] === 'atrasados') +
+              '<div class="info"><b>' + esc(i.nome) + '</b><small>' + esc(i.acao || (i.ultimoContato ? 'Último contato ' + relativo(i.ultimoContato) : 'Definir próximo contato')) + '</small></div>' +
+              '<div class="lado">' + (d.mostrarResponsavel ? '<span class="resp-cel small">' + avatar(i.responsavel, 'p', i.fotoResponsavel) + '<span>' + esc(primeiroNome(i.responsavel)) + '</span></span>' : '') +
+              (i.data ? '<span class="small muted">' + esc(relativo(i.data)) + '</span>' : '') + '</div></div>';
+          }).join('') + '</div></div>';
+      }).join('') : '<div class="card">' + vazio('calendar', 'Agenda livre', 'Nenhum contato pendente no momento.') + '</div>');
+  };
+
+  /* =========================================================
+     TELA: JORNADA (liderança cadastra as etapas)
+     ========================================================= */
+  function etapasAtivas() { return (CFG.etapas || []).filter(function (e) { return e.ativa !== false; }); }
+  function pessoasTxt(n) { return n + (n === 1 ? ' pessoa' : ' pessoas'); }
+
+  function mostrarLembrete(texto, nome) {
+    if (!texto) return;
+    abrirModal({
+      titulo: 'Lembrete', subtitulo: nome,
+      corpo: '<div class="lembrete" style="margin:0">' + ic('flag') + '<div><p>' + esc(texto) + '</p></div></div>' +
+        '<p class="muted small" style="margin-top:12px">O lembrete fica visível na ficha e no painel da liderança até ser marcado como feito.</p>',
+      rodape: '<button type="button" class="btn btn-primario" data-acao="fechar-modal">Entendi</button>'
+    });
+  }
+
+  VIEWS.jornada = async function (el, seq) {
+    var lista = await chamar('etapas.listar');
+    if (!vivo(seq)) return;
+    CFG.etapas = lista;
+    S.etapasEdicao = lista;
+    el.innerHTML = '<div class="cabecalho"><div><h1>Jornada de consolidação</h1><p class="muted">O caminho que a equipe faz com cada pessoa. Você pode renomear, reordenar, criar etapas e definir lembretes.</p></div>' +
+      '<button class="btn btn-primario" data-acao="nova-etapa">' + ic('plus') + ' Nova etapa</button></div>' +
+      '<div class="card"><div class="lista">' + lista.map(function (e, i) {
+        return '<div class="linha" style="' + (e.ativa ? '' : 'opacity:.55') + '">' +
+          '<span class="numero-etapa">' + (i + 1) + '</span>' +
+          '<div class="info"><b>' + esc(e.nome) + (e.ativa ? '' : ' <span class="badge b-neutro sem-ponto">inativa</span>') + '</b>' +
+          '<small>' + (e.lembrete ? ic('flag', 'style="width:12px;height:12px;vertical-align:-1px;color:var(--calor-texto)"') + ' Lembrete: ' + esc(e.lembrete) : pessoasTxt(e.pessoas || 0) + ' nesta etapa') + '</small></div>' +
+          '<div class="lado">' + (e.lembrete ? '<span class="small muted">' + pessoasTxt(e.pessoas || 0) + '</span>' : '') +
+          '<button class="btn btn-fantasma btn-icone" title="Subir" data-acao="mover-etapa" data-id="' + esc(e.id) + '" data-direcao="subir"' + (i === 0 ? ' disabled' : '') + '>' + ic('up') + '</button>' +
+          '<button class="btn btn-fantasma btn-icone" title="Descer" data-acao="mover-etapa" data-id="' + esc(e.id) + '" data-direcao="descer"' + (i === lista.length - 1 ? ' disabled' : '') + '>' + ic('down') + '</button>' +
+          '<button class="btn btn-secundario btn-sm" data-acao="editar-etapa" data-id="' + esc(e.id) + '">' + ic('edit') + ' Editar</button></div></div>';
+      }).join('') + '</div></div>' +
+      '<p class="muted small" style="margin-top:14px">As etapas não são uma escada obrigatória. Uma etapa com lembrete cria um aviso na ficha quando a pessoa chega nela (por exemplo, enviar os dados para a secretaria).</p>';
+  };
+
+  function modalEtapa(e) {
+    var nova = !e;
+    e = e || { ativa: true };
+    abrirModal({
+      titulo: nova ? 'Nova etapa' : 'Editar etapa', subtitulo: nova ? 'Ela entra no final da jornada; depois você pode reordenar.' : e.nome,
+      corpo: campo('Nome da etapa *', input('nome', e.nome, 'maxlength="60" placeholder="Ex.: Encontro com Deus"')) +
+        campo('Lembrete ao chegar nesta etapa (opcional)', textarea('lembrete', e.lembrete, 'maxlength="200" placeholder="Ex.: Enviar os dados da pessoa para a secretaria da igreja."'),
+          'Aparece como aviso na ficha e no painel da liderança até alguém marcar como feito.') +
+        (nova ? '' : '<label class="check"><input type="checkbox" name="ativa"' + (e.ativa ? ' checked' : '') + '><span>Etapa ativa (desmarque para esconder sem apagar)</span></label>'),
+      enviar: async function (f) {
+        if (!nova) f.id = e.id;
+        await chamar('etapas.salvar', f);
+        toast(nova ? 'Etapa criada.' : 'Etapa atualizada.');
+        fecharModal();
+        renderView();
+      }
+    });
+  }
+
+  /* =========================================================
+     TELA: EQUIPE (liderança)
+     ========================================================= */
+  VIEWS.equipe = async function (el, seq) {
+    var r = await Promise.all([chamar('equipe.listar'), chamar('equipe.opcoes')]);
+    if (!vivo(seq)) return;
+    var lista = r[0], op = r[1];
+    S.equipe = lista;
+    S.perfisCriaveis = op.perfis;
+    var corPerfil = { ADM: 'b-calor', LIDERANCA: 'b-marinho', CONSOLIDADOR: 'b-azul' };
+    var pedidos = op.pedidos.length ? '<div class="card" style="margin-bottom:18px"><div class="card-topo"><h3>' + ic('key') + ' Pedidos de nova senha</h3>' +
+      '<span class="badge b-calor">' + op.pedidos.length + ' aguardando</span></div>' +
+      '<p class="muted small" style="padding:4px 22px 0">A pessoa escolheu uma nova senha na tela de entrada. Ela só passa a valer depois que você aprovar. Se puder, confirme com a pessoa antes.</p>' +
+      '<div class="lista" style="margin-top:8px">' + op.pedidos.map(function (pd) {
+        return '<div class="linha">' + avatar(pd.nome, '', pd.foto) + '<div class="info"><b>' + esc(pd.nome) + '</b><small>' + esc(nomeDe(CFG.perfis, pd.perfil)) + ' · pedido ' + esc(relativo(pd.em)) + '</small></div>' +
+          '<div class="lado"><button class="btn btn-fantasma btn-sm" data-acao="recusar-pedido" data-id="' + esc(pd.id) + '" data-nome="' + esc(pd.nome) + '">Recusar</button>' +
+          '<button class="btn btn-primario btn-sm" data-acao="aprovar-pedido" data-id="' + esc(pd.id) + '" data-nome="' + esc(pd.nome) + '">' + ic('check') + ' Aprovar</button></div></div>';
+      }).join('') + '</div></div>' : '';
+    el.innerHTML = '<div class="cabecalho"><div><h1>Equipe</h1><p class="muted">' +
+      (ehAdm() ? 'Você pode trocar a senha da liderança e dos consolidadores a qualquer momento. Pedidos de senha da liderança chegam aqui para você aprovar.'
+        : 'Você pode trocar a senha dos consolidadores a qualquer momento e aprova os pedidos de senha deles.') + '</p></div>' +
+      (op.perfis.length ? '<button class="btn btn-primario" data-acao="novo-usuario">' + ic('userPlus') + ' Novo integrante</button>' : '') + '</div>' + pedidos +
+      '<div class="card"><div class="lista">' + lista.map(function (u) {
+        var pct = Math.round(u.carga / u.capacidade * 100);
+        var cons = u.perfil === 'CONSOLIDADOR' || u.carga;
+        return '<div class="linha ' + (u.podeGerenciar ? 'clicavel' : '') + '"' + (u.podeGerenciar ? ' data-acao="editar-usuario" data-id="' + esc(u.id) + '"' : '') + ' style="' + (u.ativo ? '' : 'opacity:.6') + '">' + avatar(u.nome, '', u.foto) +
+          '<div class="info"><b>' + esc(u.nome) + (u.id === S.usuario.id ? ' <span class="muted" style="font-weight:500">(você)</span>' : '') + '</b><small>' + esc(u.email) + '</small></div>' +
+          '<div class="lado"><span class="badge ' + (corPerfil[u.perfil] || 'b-azul') + ' sem-ponto">' + esc(nomeDe(CFG.perfis, u.perfil)) + '</span>' +
+          (!u.ativo ? '<span class="badge b-neutro">Inativo</span>' : cons ? '<div style="width:110px" class="col-ultimo"><div class="small muted" style="text-align:right;margin-bottom:4px">' + u.carga + ' de ' + u.capacidade + '</div><div class="barra ' + (pct >= 100 ? 'cheia' : '') + '"><i style="width:' + Math.min(100, pct) + '%"></i></div></div>' : '<div style="width:110px" class="col-ultimo"></div>') +
+          (u.podeGerenciar ? (CFG.authModo === 'SENHA' ? '<button class="btn btn-secundario btn-sm" data-acao="trocar-senha-de" data-id="' + esc(u.id) + '">' + ic('key') + '<span class="so-desktop"> Trocar senha</span></button>' : '')
+            : '<span title="Gerenciado por um perfil acima" style="color:var(--texto-3);width:38px;display:inline-flex;justify-content:center">' + ic('lock') + '</span>') +
+          '</div></div>';
+      }).join('') + '</div></div>';
+  };
+
+  function modalSenha(nome, email, senha) {
+    abrirModal({
+      titulo: 'Senha temporária', subtitulo: nome,
+      corpo: '<p class="muted">Envie estes dados de acesso para <b>' + esc(nome) + '</b> por um canal seguro. No primeiro acesso será pedida uma senha pessoal.</p>' +
+        '<p style="margin-top:14px"><span class="small muted">E-mail</span><br><b>' + esc(email) + '</b></p>' +
+        '<div class="senha-temp">' + esc(senha) + '</div><p class="small muted">Esta senha não será exibida novamente.</p>',
+      rodape: '<button type="button" class="btn btn-primario" data-acao="fechar-modal">Entendi</button>'
+    });
+  }
+
+  function modalTrocarSenha(u) {
+    abrirModal({
+      titulo: 'Trocar senha', subtitulo: u.nome + ' · ' + nomeDe(CFG.perfis, u.perfil), botao: 'Salvar nova senha',
+      corpo: campo('Nova senha', input('nova', '', 'type="password" autocomplete="new-password"'), 'Pelo menos ' + CFG.senhaMin + ' caracteres.') +
+        campo('Repita a nova senha', input('confirmacao', '', 'type="password" autocomplete="new-password"')) +
+        '<label class="check"><input type="checkbox" name="trocarNoProximo" checked><span><b>Pedir que a pessoa crie a própria senha no próximo acesso</b><br><span class="small muted">Recomendado: assim só ela fica sabendo a senha definitiva.</span></span></label>' +
+        '<p class="small muted">Prefere não escolher? <a href="#" data-acao="redefinir-senha" data-id="' + esc(u.id) + '">Gerar uma senha temporária automática</a>.</p>',
+      enviar: async function (f) {
+        if (f.nova !== f.confirmacao) throw new Error('As senhas não conferem.');
+        await chamar('equipe.trocarSenha', { id: u.id, nova: f.nova, trocarNoProximo: f.trocarNoProximo });
+        fecharModal();
+        toast('Senha de ' + primeiroNome(u.nome) + ' alterada.');
+        renderView();
+      }
+    });
+  }
+
+  function modalUsuario(u) {
+    var novo = !u;
+    var perfis = S.perfisCriaveis || [];
+    u = u || { perfil: perfis.length ? perfis[perfis.length - 1].id : 'CONSOLIDADOR', capacidade: 5, ativo: true };
+    var euMesmo = false;
+    abrirModal({
+      titulo: novo ? 'Novo integrante' : 'Editar integrante', subtitulo: novo ? 'Uma senha temporária será gerada para o primeiro acesso.' : u.email,
+      corpo: '<div class="form-grade">' +
+        campo('Nome completo *', input('nome', u.nome, 'maxlength="120"'), '', 'inteiro') +
+        campo('E-mail de acesso *', input('email', u.email, 'type="email"' + (novo ? '' : ' disabled'))) +
+        campo('Telefone', input('telefone', u.telefone, 'inputmode="tel"')) +
+        (perfis.length > 1 ? campo('Perfil', segmentos('perfil', perfis, u.perfil), 'Liderança conduz a consolidação; consolidador vê apenas as pessoas atribuídas a ele.', 'inteiro')
+          : '<input type="hidden" name="perfil" value="' + esc(u.perfil) + '">') +
+        campo('Capacidade de acompanhamento', input('capacidade', u.capacidade, 'type="number" min="1" max="50"'), 'Quantas pessoas pode acompanhar ao mesmo tempo.') +
+        (novo ? '' : '<div class="campo"><label>Acesso</label><label class="check" style="margin:0"><input type="checkbox" name="ativo"' + (u.ativo ? ' checked' : '') + (euMesmo ? ' disabled' : '') + '><span>Acesso ativo</span></label></div>') +
+        (!novo && CFG.authModo === 'SENHA' ? '<div class="inteiro"><button type="button" class="btn btn-fantasma btn-sm" data-acao="trocar-senha-de" data-id="' + esc(u.id) + '">' + ic('key') + ' Trocar senha</button></div>' : '') +
+        '</div>',
+      enviar: async function (f) {
+        if (novo) {
+          var r = await chamar('equipe.criar', f);
+          renderView();
+          if (r.senhaTemporaria) modalSenha(r.usuario.nome, r.usuario.email, r.senhaTemporaria);
+          else { fecharModal(); toast('Integrante cadastrado.'); }
+        } else {
+          f.id = u.id;
+          if (euMesmo) f.ativo = true;
+          await chamar('equipe.atualizar', f);
+          toast('Integrante atualizado.');
+          fecharModal();
+          renderView();
+        }
+      }
+    });
+  }
+
+  /* =========================================================
+     TELA: AUDITORIA (liderança)
+     ========================================================= */
+  var ACOES_AUD = {
+    LOGIN: 'Entrou no sistema', LOGIN_FALHOU: 'Tentativa de login sem sucesso', TROCAR_SENHA: 'Trocou a senha',
+    CRIAR_USUARIO: 'Cadastrou integrante', ATUALIZAR_USUARIO: 'Alterou integrante', REDEFINIR_SENHA: 'Gerou senha temporária',
+    CRIAR_PESSOA: 'Cadastrou pessoa', ATUALIZAR_PESSOA: 'Atualizou pessoa', ARQUIVAR_PESSOA: 'Arquivou cadastro', REATIVAR_PESSOA: 'Reativou cadastro',
+    VISUALIZAR_FICHA: 'Consultou ficha', ACESSO_NEGADO: 'Acesso negado à ficha',
+    ATRIBUIR: 'Atribuiu responsável', TRANSFERIR: 'Transferiu responsável', REMOVER_ATRIBUICAO: 'Removeu responsável',
+    REGISTRAR_ACOMPANHAMENTO: 'Registrou acompanhamento', ATENDER_ENCAMINHAMENTO: 'Atendeu pedido de apoio', TROCAR_FOTO: 'Trocou foto', REMOVER_FOTO: 'Removeu foto', RESOLVER_LEMBRETE: 'Marcou lembrete como feito',
+    CRIAR_ETAPA: 'Criou etapa da jornada', ATUALIZAR_ETAPA: 'Alterou etapa da jornada', REORDENAR_ETAPAS: 'Reordenou a jornada',
+    PEDIR_SENHA: 'Pediu nova senha', TROCAR_SENHA_DE: 'Trocou a senha de um integrante', APROVAR_SENHA: 'Aprovou nova senha', RECUSAR_SENHA: 'Recusou pedido de senha',
+    INSTALACAO: 'Instalação do sistema'
+  };
+
+  VIEWS.historico = async function (el, seq) {
+    var lista = await chamar('auditoria.listar', { limite: 300 });
+    if (!vivo(seq)) return;
+    el.innerHTML = '<div class="cabecalho"><div><h1>Histórico</h1><p class="muted">Quem consultou ou alterou informações, e quando. O conteúdo das conversas nunca é gravado aqui.</p></div></div>' +
+      '<div class="card auditoria"><div class="lista">' + (lista.length ? lista.map(function (a) {
+        var perigo = a.acao === 'ACESSO_NEGADO' || a.acao === 'LOGIN_FALHOU';
+        return '<div class="linha"><div class="quando">' + esc(dataBR(a.data)) + '<br>' + esc(String(a.data).slice(11, 16)) + '</div>' +
+          '<div class="info"><b style="font-weight:500">' + esc(a.usuario) + ' · <span style="color:' + (perigo ? 'var(--perigo)' : 'var(--texto-2)') + '">' + esc(ACOES_AUD[a.acao] || a.acao) + '</span></b>' +
+          '<small>' + esc(a.alvo || (a.detalhes && a.detalhes.email) || '') + '</small></div></div>';
+      }).join('') : vazio('shield', 'Sem registros', 'As ações aparecerão aqui.')) + '</div></div>';
+  };
+
+  /* =========================================================
+     TELA: MINHA CONTA
+     ========================================================= */
+  VIEWS.conta = async function (el) {
+    var u = S.usuario;
+    el.innerHTML = '<div class="cabecalho"><div><h1>Minha conta</h1></div></div>' +
+      '<div class="grade grade-meio" style="align-items:start">' +
+      '<div class="card card-corpo"><div style="display:flex;gap:16px;align-items:center;margin-bottom:18px">' + fotoEditavel(u.nome, u.foto, u.id) +
+      '<div><h2>' + esc(u.nome) + '</h2><p class="muted">' + esc(u.email) + '</p><p class="small muted" style="margin-top:4px">Toque na foto para trocar.</p></div></div>' +
+      '<div class="dl">' + item('Perfil', esc(nomeDe(CFG.perfis, u.perfil))) + item('Na equipe desde', esc(dataBR(u.dataEntrada))) + '</div>' +
+      '<button class="btn btn-secundario" style="margin-top:22px" data-acao="sair">' + ic('logout') + ' Sair do sistema</button></div>' +
+      (CFG.authModo === 'SENHA' ? '<form class="card card-corpo" id="form-senha"><h3 style="margin-bottom:14px">Trocar senha</h3>' +
+        campo('Senha atual', input('atual', '', 'type="password" autocomplete="current-password"')) +
+        campo('Nova senha', input('nova', '', 'type="password" autocomplete="new-password"'), 'Pelo menos ' + CFG.senhaMin + ' caracteres.') +
+        campo('Repita a nova senha', input('confirmacao', '', 'type="password" autocomplete="new-password"')) +
+        '<button class="btn btn-primario" type="submit">Salvar nova senha</button></form>' : '') +
+      '</div>';
+    var f = $('#form-senha');
+    if (f) f.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var d = lerForm(f);
+      if (d.nova !== d.confirmacao) return toast('As senhas não conferem.', 'erro');
+      var btn = f.querySelector('[type=submit]');
+      carregandoBtn(btn, true);
+      try { await chamar('auth.trocarSenha', d); toast('Senha alterada.'); f.reset(); }
+      catch (err) { toast(err.message, 'erro'); }
+      finally { carregandoBtn(btn, false); }
+    });
+  };
+
+  /* =========================================================
+     AÇÕES (delegação de cliques)
+     ========================================================= */
+  var ACOES = {
+    'ir': function (d) { ir(d.rota, d.filtro ? { filtro: d.filtro } : {}); },
+    'abrir-pessoa': function (d) { ir('pessoa', { id: d.id }); },
+    'voltar': function () { var a = S.anterior || { rota: 'painel' }; ir(a.rota, a.params); },
+    'recarregar': function () { limparMemoria(); renderView(); },
+    'sair': function () { sair(); },
+    'fechar-modal': function () { fecharModal(); },
+    'nova-pessoa': function () { modalNovaPessoa(); },
+    'atribuir': function (d) { modalAtribuir(d.id, d.nome, d.atual || ''); },
+    'aba': function (d) { S.abaFicha = d.aba; desenharAba(); },
+    'registrar': function () { modalRegistro(); },
+    'editar-pessoa': function () { modalEditarPessoa(); },
+    'remover-resp': function () {
+      modalMotivo('Remover responsável', 'A pessoa voltará para a lista de "sem responsável". O histórico é mantido.', 'Remover',
+        'atribuicoes.remover', { idPessoa: S.ficha.pessoa.id }, 'Responsável removido.');
+    },
+    'arquivar': function () {
+      modalMotivo('Arquivar cadastro', 'O acompanhamento ativo será encerrado. O histórico continua guardado e o cadastro pode ser reativado.', 'Arquivar',
+        'pessoas.arquivar', { id: S.ficha.pessoa.id }, 'Cadastro arquivado.');
+    },
+    'reativar': async function () {
+      try { await chamar('pessoas.reativar', { id: S.ficha.pessoa.id }); toast('Cadastro reativado.'); renderView(); }
+      catch (e) { toast(e.message, 'erro'); }
+    },
+    'trocar-foto': function (d) { trocarFoto(d.id, !!d.tem); },
+    'pedir-senha': function () { modalPedirSenha(); },
+    'trocar-senha-de': function (d) { modalTrocarSenha((S.equipe || []).filter(function (u) { return u.id === d.id; })[0]); },
+    'aprovar-pedido': async function (d) {
+      if (!await confirmar('Aprovar a nova senha de ' + d.nome + '?', 'A senha escolhida pela pessoa passa a valer agora. Se puder, confirme com ela que foi ela mesma quem pediu.', 'Aprovar')) return;
+      try { await chamar('pedidos.aprovar', { id: d.id }); toast('Nova senha aprovada.'); renderView(); } catch (e) { toast(e.message, 'erro'); }
+    },
+    'recusar-pedido': async function (d) {
+      if (!await confirmar('Recusar o pedido de ' + d.nome + '?', 'A senha atual continua valendo.', 'Recusar', true)) return;
+      try { await chamar('pedidos.recusar', { id: d.id }); toast('Pedido recusado.'); renderView(); } catch (e) { toast(e.message, 'erro'); }
+    },
+    'atender-encaminhamento': async function () {
+      try { await chamar('acompanhamentos.atenderEncaminhamento', { idPessoa: S.ficha.pessoa.id }); toast('Marcado como atendido.'); renderView(); }
+      catch (e) { toast(e.message, 'erro'); }
+    },
+    'resolver-lembrete': async function () {
+      try { await chamar('pessoas.resolverPendencia', { id: S.ficha.pessoa.id }); toast('Lembrete concluído.'); renderView(); }
+      catch (e) { toast(e.message, 'erro'); }
+    },
+    'nova-etapa': function () { modalEtapa(); },
+    'editar-etapa': function (d) { modalEtapa((S.etapasEdicao || []).filter(function (e) { return e.id === d.id; })[0]); },
+    'mover-etapa': async function (d) {
+      try { await chamar('etapas.mover', { id: d.id, direcao: d.direcao }); renderView(); }
+      catch (e) { toast(e.message, 'erro'); }
+    },
+    'novo-usuario': function () { modalUsuario(); },
+    'editar-usuario': function (d) { modalUsuario((S.equipe || []).filter(function (u) { return u.id === d.id; })[0]); },
+    'redefinir-senha': async function (d) {
+      var u = (S.equipe || []).filter(function (x) { return x.id === d.id; })[0];
+      if (!await confirmar('Gerar nova senha temporária?', 'A senha atual de ' + u.nome + ' deixará de funcionar.', 'Gerar senha')) return;
+      try { var r = await chamar('equipe.redefinirSenha', { id: d.id }); modalSenha(u.nome, u.email, r.senhaTemporaria); }
+      catch (e) { toast(e.message, 'erro'); }
+    }
+  };
+
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('[data-acao]');
+    if (!alvo || alvo.disabled) return;
+    if (alvo.tagName === 'A') e.preventDefault();
+    var fn = ACOES[alvo.dataset.acao];
+    if (fn) { e.stopPropagation(); fn(alvo.dataset, alvo, e); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') fecharModal(); });
+  window.addEventListener('scroll', function () { var t = $('#topo'); if (t) t.classList.toggle('rolado', window.scrollY > 4); }, { passive: true });
+
+  /* =========================================================
+     INÍCIO
+     ========================================================= */
+  async function iniciar() {
+    if (!CFG.appNome) { // telas fora do Google: busca a configuração no servidor
+      try { Object.assign(CFG, await chamar('app.config')); }
+      catch (e) {
+        $('#app').innerHTML = '<div class="carregando-tela">' + vazio('alert', 'Não foi possível conectar', e.message,
+          '<button class="btn btn-secundario" style="margin-top:16px" onclick="location.reload()">Tentar novamente</button>') + '</div>';
+        return;
+      }
+    }
+    if (CFG.authModo === 'GOOGLE') {
+      try { S.usuario = (await chamar('auth.sessao')).usuario; entrar(); }
+      catch (e) { $('#app').innerHTML = '<div class="carregando-tela">' + vazio('lock', 'Acesso não liberado', e.message) + '</div>'; }
+      return;
+    }
+    S.token = store.get(CHAVE_TOKEN);
+    if (!S.token) return renderLogin();
+    try {
+      S.usuario = (await chamar('auth.sessao')).usuario;
+      if (S.usuario.trocarSenha) renderTrocaObrigatoria(); else entrar();
+    } catch (e) {
+      store.set(CHAVE_TOKEN, null); S.token = null;
+      renderLogin();
+    }
+  }
+
+  window.ConsolidacaoApp = { iniciar: iniciar };
+  iniciar();
+})();
+</script>
+
+  </body>
+</html>
